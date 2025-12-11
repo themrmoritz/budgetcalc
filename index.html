@@ -10,17 +10,20 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-   
+    
     <style>
+        /* Global Text Scale Increase (10%) */
+        html { font-size: 110%; }
+
         body { font-family: 'Inter', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
-       
+        
         /* Compact Scaling for 1366x768 optimization */
         .app-container {
             transform: scale(0.95);
             transform-origin: top center;
         }
-       
+        
         /* Custom Range Slider Styling */
         .slider-thumb::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -38,7 +41,6 @@
             transform: scale(1.1);
         }
 
-
         /* Animations */
         .slide-in { animation: slideIn 0.3s ease-out forwards; }
         @keyframes slideIn {
@@ -46,18 +48,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-
         /* Step Visibility */
         .step-hidden { display: none; }
         .step-active { display: block; }
-
 
         /* Scrollbar */
         .custom-scroll::-webkit-scrollbar { width: 5px; }
         .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         .custom-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
 
         /* Sticky Sidebar Utilities */
         .sticky-sidebar {
@@ -66,7 +65,6 @@
             max-height: calc(100vh - 1rem);
             overflow-y: auto;
         }
-
 
         /* Card Selection Styles */
         .card-selected {
@@ -83,26 +81,28 @@
             opacity: 1;
             border-color: #94a3b8;
         }
-       
+        
         .card-permanent {
             border-color: #0f172a;
             background-color: #f8fafc;
             opacity: 1;
         }
+
+        /* Scale up bottom rows of final table by 25% */
+        .super-size-text { font-size: 1.25em; }
     </style>
 </head>
 <body class="bg-white min-h-screen text-slate-800 flex justify-center items-start overflow-x-hidden text-sm">
 
-
     <!-- Scaled Wrapper -->
     <div class="app-container w-full max-w-[1280px] p-2">
-       
+        
         <!-- Main Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 relative">
-           
+            
             <!-- LEFT COLUMN: MAIN CONTENT -->
             <div id="layout-main" class="col-span-1 lg:col-span-8 bg-white rounded-[1.5rem] shadow-xl border border-slate-200 min-h-[500px] flex flex-col relative overflow-hidden transition-all duration-300">
-               
+                
                 <!-- Progress Indicator -->
                 <div class="px-6 py-4 border-b border-slate-100">
                     <div class="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2" id="progress-labels">
@@ -119,16 +119,14 @@
                     </div>
                 </div>
 
-
                 <!-- CONTENT AREA -->
                 <div class="flex-1 p-6 md:p-8 overflow-y-auto custom-scroll relative">
 
-
                     <!-- STEP 1: ROI PILOT BUDGET -->
                     <div id="step-1" class="step-active slide-in">
-                        <h2 class="text-2xl font-black text-slate-900 uppercase mb-1">ROI Pilot Budget</h2>
-                        <p class="text-slate-500 font-medium mb-6 text-xs">Let's set some targets to calculate your break-even budget ceiling.</p>
-
+                        <!-- Updated Headline & Subhead -->
+                        <h2 class="text-2xl font-black text-slate-900 uppercase mb-1">90 Day DM Pilot Campaign</h2>
+                        <p class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-6">ROI BUDGET</p>
 
                         <div class="space-y-5 max-w-3xl">
                             <!-- Row 1: Targets & Conv -->
@@ -143,9 +141,13 @@
                                         <span id="display-conv" class="text-lg font-black text-slate-900">2.0%</span>
                                     </div>
                                     <input type="range" id="input-conv" min="0.1" max="10" step="0.1" value="2.0" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
+                                    <!-- Added Labels -->
+                                    <div class="flex justify-between text-[10px] font-bold text-slate-400 mt-2 uppercase">
+                                        <span>Conservative</span>
+                                        <span>Aggressive</span>
+                                    </div>
                                 </div>
                             </div>
-
 
                             <!-- Row 2: Customer Value -->
                             <div>
@@ -153,7 +155,7 @@
                                     <i data-lucide="calculator" class="w-3 h-3"></i>
                                     Customer Value
                                 </h3>
-                               
+                                
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                     <!-- Spend -->
                                     <div>
@@ -163,10 +165,11 @@
                                             <input type="number" id="input-spend" value="75000" class="w-full p-2 pl-6 border border-slate-200 rounded-lg focus:border-slate-900 focus:outline-none font-bold text-slate-900 text-sm">
                                         </div>
                                     </div>
-                                   
+                                    
                                     <!-- Tenure -->
                                     <div>
-                                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wide mb-1">Client Tenure (Years)</label>
+                                        <!-- Removed "(Years)" from label -->
+                                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wide mb-1">Client Tenure</label>
                                         <div class="flex items-center gap-2">
                                             <div class="flex-grow">
                                                 <input type="range" id="input-tenure" min="1" max="10" step="1" value="1" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
@@ -181,16 +184,16 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+                                
                                 <!-- Break Even Calculation Row -->
                                 <div class="p-3 bg-slate-100 rounded-xl border border-slate-200 flex flex-col md:flex-row justify-between items-center gap-3">
                                     <div class="flex flex-col">
                                         <span class="text-[9px] font-bold text-slate-500 uppercase mb-0.5">Client LTV</span>
                                         <span id="display-ltv" class="text-lg font-black text-slate-900">$75,000</span>
                                     </div>
-                                   
+                                    
                                     <div class="text-slate-400 font-bold text-lg">×</div>
-                                   
+                                    
                                     <div class="flex flex-col">
                                         <label class="text-[9px] font-bold text-slate-500 uppercase mb-0.5">Profit Margin</label>
                                         <div class="flex items-center gap-1 bg-white px-2 py-0.5 rounded border border-slate-300">
@@ -199,9 +202,7 @@
                                         </div>
                                     </div>
 
-
                                     <div class="text-slate-400 font-bold text-lg">=</div>
-
 
                                     <div class="flex flex-col items-end">
                                         <span class="text-[9px] font-bold text-slate-500 uppercase mb-0.5">Break Even Ceiling</span>
@@ -212,8 +213,7 @@
                         </div>
                     </div>
 
-
-                    <!-- STEP 2: BLUEPRINT (UPDATED STYLING) -->
+                    <!-- STEP 2: BLUEPRINT -->
                     <div id="step-2" class="step-hidden slide-in">
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
                             <!-- Content -->
@@ -221,8 +221,8 @@
                                 <h2 class="text-2xl font-black text-slate-900 mb-1">Phase 1: The Blueprint</h2>
                                 <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Strategy & Narrative</h3>
                                 <p class="text-slate-400 text-[10px] font-medium mb-4">One-time investment. Foundation for all future marketing.</p>
-                               
-                                <!-- Updated List Styling with Descriptions -->
+                                
+                                <!-- Checklist -->
                                 <ul class="space-y-3 mb-4">
                                     <li class="flex items-start gap-3 p-3 bg-white border border-slate-100 rounded-lg shadow-sm">
                                         <div class="mt-0.5"><i data-lucide="check" class="w-4 h-4 text-slate-900"></i></div>
@@ -247,7 +247,7 @@
                                     </li>
                                 </ul>
                             </div>
-                           
+                            
                             <!-- Price Card -->
                             <div class="flex items-center justify-center">
                                 <div class="w-full bg-slate-50 text-slate-900 p-6 rounded-2xl text-center shadow-md border border-slate-100 relative overflow-hidden">
@@ -258,21 +258,18 @@
                         </div>
                     </div>
 
-
-                    <!-- STEP 3: CREATIVE (Renamed) -->
+                    <!-- STEP 3: CREATIVE -->
                     <div id="step-3" class="step-hidden slide-in">
                         <div class="mb-4">
                             <h2 class="text-2xl font-black text-slate-900 mb-1">Phase 2: Package Concept</h2>
                             <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">DM Creative Development</h3>
                         </div>
 
-
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
                             <div>
                                 <p class="text-slate-600 mb-4 leading-relaxed text-xs">
                                     Ideation and development of the physical gift and unboxing experience.
                                 </p>
-
 
                                 <ul class="space-y-2 mb-4">
                                     <li class="flex items-center gap-3 p-2 bg-white border border-slate-100 rounded-lg shadow-sm">
@@ -289,7 +286,7 @@
                                     </li>
                                 </ul>
                             </div>
-                           
+                            
                             <!-- Price Card -->
                             <div class="flex items-center justify-center">
                                 <div class="w-full bg-slate-50 text-slate-900 p-6 rounded-2xl text-center shadow-md border border-slate-100 relative overflow-hidden">
@@ -301,14 +298,12 @@
                         </div>
                     </div>
 
-
-                    <!-- STEP 4: PRODUCTION (Cards) -->
+                    <!-- STEP 4: PRODUCTION -->
                     <div id="step-4" class="step-hidden slide-in">
                         <div class="mb-4">
                             <h2 class="text-2xl font-black text-slate-900 mb-1">Phase 2b: DM Production</h2>
                             <p class="text-slate-500 text-xs">Select who will handle the execution.</p>
                         </div>
-
 
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             <!-- Left Column: Inputs -->
@@ -338,7 +333,6 @@
                                             </div>
                                         </div>
 
-
                                         <!-- Option 2: Boost -->
                                         <div id="card-man-boost" class="border rounded-lg p-3 cursor-pointer transition-all card-unselected relative" onclick="toggleProd('man', 'boost')">
                                             <div class="flex justify-between items-start mb-2">
@@ -351,7 +345,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <!-- Distribution -->
                                 <div>
@@ -372,7 +365,6 @@
                                             <p class="text-[9px] text-slate-500">+ Shipping ($1-2k)</p>
                                         </div>
 
-
                                         <!-- Option 2: Boost -->
                                         <div id="card-dist-boost" class="border rounded-lg p-3 cursor-pointer transition-all card-unselected relative" onclick="toggleProd('dist', 'boost')">
                                             <div class="flex justify-between items-start mb-2">
@@ -387,8 +379,7 @@
                                 </div>
                             </div>
 
-
-                            <!-- Right Column: Price Card (New for this layout) -->
+                            <!-- Right Column: Price Card -->
                             <div class="flex items-center justify-center">
                                 <div class="w-full bg-slate-50 text-slate-900 p-6 rounded-2xl text-center shadow-md border border-slate-100 relative overflow-hidden">
                                     <span class="block text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Phase 2b Investment</span>
@@ -399,16 +390,15 @@
                         </div>
                     </div>
 
-
-                    <!-- STEP 5: FOLLOW UP (ADD ONS) -->
+                    <!-- STEP 5: FOLLOW UP -->
                     <div id="step-5" class="step-hidden slide-in">
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
                             <div>
                                 <h2 class="text-2xl font-black text-slate-900 mb-1">Phase 3: The Follow-Up</h2>
                                 <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Sales Enablement</h3>
-                               
+                                
                                 <div class="space-y-3">
-                                    <!-- Required Item (Styling Updated) -->
+                                    <!-- Required Item -->
                                     <div class="flex items-start gap-3 p-3 rounded-xl border-2 card-permanent">
                                         <div class="flex-1">
                                             <div class="flex justify-between w-full">
@@ -418,7 +408,6 @@
                                             <p class="text-[10px] text-slate-500 mt-0.5">Ongoing campaign management (90 Days).</p>
                                         </div>
                                     </div>
-
 
                                     <!-- Option 1 -->
                                     <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-900 bg-slate-100 cursor-pointer transition-all relative group" id="card-nurture">
@@ -432,7 +421,6 @@
                                         </div>
                                     </label>
 
-
                                     <!-- Option 2 -->
                                     <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-300 bg-slate-50 cursor-pointer transition-all relative group" id="card-deck">
                                         <input type="checkbox" id="check-deck" class="mt-0.5 w-4 h-4 accent-slate-900" checked onchange="toggleCardStyle('deck')">
@@ -444,7 +432,6 @@
                                             <p class="text-[10px] text-slate-500 mt-0.5">Scripting & design for leave-behind deck.</p>
                                         </div>
                                     </label>
-
 
                                     <!-- Option 3 -->
                                     <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-300 bg-slate-50 cursor-pointer transition-all relative group" id="card-lp">
@@ -459,7 +446,7 @@
                                     </label>
                                 </div>
                             </div>
-                           
+                            
                             <!-- Dynamic Price Card -->
                             <div class="flex items-center justify-center">
                                 <div class="w-full bg-slate-50 text-slate-900 p-6 rounded-2xl text-center shadow-md border border-slate-100 relative overflow-hidden">
@@ -470,7 +457,6 @@
                         </div>
                     </div>
 
-
                     <!-- STEP 6: SUMMARY PAGE -->
                     <div id="step-6" class="step-hidden slide-in">
                         <div class="text-center mb-6">
@@ -478,14 +464,13 @@
                             <p class="text-slate-500 text-xs">Review your configured B2B Pain Relief campaign.</p>
                         </div>
 
-
                         <div class="bg-slate-200 border border-slate-300 rounded-lg overflow-hidden max-w-xl mx-auto shadow-md">
                             <!-- Header -->
                             <div class="p-4 flex justify-between items-center border-b border-slate-300">
                                 <h3 class="font-black text-slate-900 uppercase text-sm tracking-tight">LINE ITEM BREAKDOWN</h3>
                                 <span class="bg-slate-900 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">90 Day Pilot</span>
                             </div>
-                           
+                            
                             <!-- List Items -->
                             <div class="divide-y divide-slate-300">
                                 <div class="p-4 flex justify-between items-center bg-white/50 text-xs">
@@ -506,7 +491,6 @@
                                 </div>
                             </div>
 
-
                             <!-- Footer Total -->
                             <div class="p-4 bg-slate-900 text-white flex justify-between items-center">
                                 <span class="font-medium text-slate-400 text-xs">Total Investment Range</span>
@@ -515,14 +499,13 @@
                         </div>
                     </div>
 
-
                     <!-- STEP 7: SCALE COMPARISON -->
                     <div id="step-7" class="step-hidden slide-in">
                         <div class="text-center mb-6">
-                            <h2 class="text-2xl font-black text-slate-900 mb-1">Campaign Scale Projection</h2>
+                            <!-- Updated Headline -->
+                            <h2 class="text-2xl font-black text-slate-900 mb-1">DM Campaign Scale Projection</h2>
                             <p class="text-slate-500 text-xs">Compare your pilot investment with the 12-month rollout.</p>
                         </div>
-
 
                         <div class="bg-white border-2 border-slate-100 rounded-2xl overflow-hidden max-w-4xl mx-auto shadow-lg text-xs">
                             <table class="w-full">
@@ -563,7 +546,7 @@
                                         <td class="p-4 text-right font-medium text-slate-900 bg-slate-50">$6,000</td>
                                     </tr>
                                 </tbody>
-                                <tfoot class="bg-slate-900 text-white border-t-4 border-white">
+                                <tfoot class="bg-slate-900 text-white border-t-4 border-white super-size-text">
                                     <tr>
                                         <td class="p-4 font-medium text-slate-400">Total Investment</td>
                                         <td class="p-4 text-right text-lg font-bold" id="scale-total-90">$0</td>
@@ -585,9 +568,7 @@
                         </div>
                     </div>
 
-
                 </div>
-
 
                 <!-- FOOTER NAV -->
                 <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex justify-between items-center z-10">
@@ -602,12 +583,11 @@
                 </div>
             </div>
 
-
             <!-- RIGHT COLUMN: SIDEBAR (Reverted Design) -->
             <div id="layout-sidebar" class="col-span-1 lg:col-span-4 pl-0 lg:pl-4 transition-all duration-300">
                 <div class="sticky-sidebar">
                     <div class="bg-white border-2 border-slate-200 rounded-2xl p-5 shadow-sm">
-                       
+                        
                         <!-- Reverted Header (Plain Active Ingredients) -->
                         <div class="text-center pb-3 mb-3 border-b border-slate-100">
                             <h3 class="font-black text-slate-900 uppercase text-base tracking-tight mb-1">B2B MARKETING PAIN RELIEF</h3>
@@ -618,12 +598,11 @@
                             </div>
                         </div>
 
-
                         <!-- Ingredients List -->
                         <div class="space-y-2 text-xs mb-4 max-h-[350px] overflow-y-auto pr-2 custom-scroll" id="summary-list">
                             <div class="text-center text-slate-400 italic text-[10px] py-4">Initializing...</div>
                         </div>
-                       
+                        
                         <!-- Budget Progress -->
                         <div class="mb-4">
                             <div class="flex justify-between items-end mb-1">
@@ -634,7 +613,6 @@
                                 <div id="budget-bar" class="bg-slate-900 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
                             </div>
                         </div>
-
 
                         <!-- Totals Box (Side by Side) -->
                         <div class="bg-slate-50 rounded-xl p-3 border border-slate-200">
@@ -648,7 +626,7 @@
                                     <span id="summary-total" class="font-black text-slate-900 text-sm leading-tight">$0</span>
                                 </div>
                             </div>
-                           
+                            
                             <!-- Warning -->
                             <div id="budget-warning" class="hidden mt-2 text-center">
                                 <div class="inline-flex items-center gap-1 text-[9px] font-bold text-red-600 bg-red-50 px-2 py-1 rounded border border-red-100 w-full justify-center">
@@ -657,7 +635,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+                        
                         <div class="text-center mt-3">
                             <span class="text-[9px] font-bold text-slate-300 uppercase tracking-widest">Dosage: 90 Days</span>
                         </div>
@@ -665,10 +643,8 @@
                 </div>
             </div>
 
-
         </div>
     </div>
-
 
     <script>
         // --- STATE & DATA ---
@@ -699,7 +675,6 @@
             },
             budgetLimit: 0
         };
-
 
         // --- ELEMENTS ---
         const els = {
@@ -753,9 +728,7 @@
             scaleRoi12m: document.getElementById('scale-roi-12m'),
         };
 
-
         // --- CORE FUNCTIONS ---
-
 
         const formatCurrency = (num) => {
             return new Intl.NumberFormat('en-US', {
@@ -764,7 +737,6 @@
                 maximumFractionDigits: 0
             }).format(num);
         };
-
 
         const calculateTotal = () => {
             // Update State
@@ -778,21 +750,19 @@
             state.inputs.deck = els.deck.checked;
             state.inputs.lp = els.lp.checked;
 
-
             // ROI Math
             els.displayConv.textContent = state.inputs.conv.toFixed(1) + '%';
             els.displayTenure.textContent = state.inputs.tenure;
-           
+            
             const ltv = state.inputs.spend * state.inputs.tenure;
             els.displayLtv.textContent = formatCurrency(ltv);
-           
+            
             const newClients = state.inputs.targets * (state.inputs.conv / 100);
             const pilotRevenue = newClients * ltv;
-           
+            
             state.budgetLimit = pilotRevenue * (state.inputs.margin / 100);
             els.summaryBudget.textContent = formatCurrency(state.budgetLimit);
             els.displayBreakevenRow.textContent = formatCurrency(state.budgetLimit);
-
 
             // Costs
             // Phase 3 (Project Support $1500*3 = $4500 fixed)
@@ -803,17 +773,15 @@
             state.costs.phase3 = p3;
             els.phase3Total.textContent = formatCurrency(p3);
 
-
             // Phase 2b Production
             let prod = 0;
             if (state.inputs.manSource === 'mr') prod += (state.inputs.manCost * state.inputs.targets);
             if (state.inputs.distSource === 'mr') prod += (state.inputs.distBase + state.inputs.distMat);
             state.costs.prodTotal = prod;
             els.displayPhase2bTotal.textContent = formatCurrency(prod);
-           
+            
             updateSidebar();
         };
-
 
         const updateSidebar = () => {
             let html = '';
@@ -821,13 +789,11 @@
             let maxTotal = 0;
             let total12m = 0;
 
-
             // Dynamic Context Text (Sidebar uses "customer")
             const newCustomers = state.inputs.targets * (state.inputs.conv / 100);
             const custLabel = newCustomers > 1 || newCustomers === 0 ? 'customers' : 'customer';
             const formattedCust = newCustomers % 1 === 0 ? newCustomers : newCustomers.toFixed(1);
             els.sidebarContext.textContent = `${state.inputs.conv.toFixed(1)}% conversion rate = ${formattedCust} new ${custLabel} during trial period`;
-
 
             // 12m Logic Calculations
             // 12m Production = 90day Total * 4
@@ -837,14 +803,12 @@
             // Total 12m = Prod + Follow Up (Blueprint/Creative are $0)
             total12m = prod12m + follow12m;
 
-
             const addRow = (label, minCost, maxCost, highlight=false) => {
                 minTotal += minCost;
                 maxTotal += maxCost;
-               
+                
                 let costStr = formatCurrency(minCost);
                 if (minCost !== maxCost) costStr = `${formatCurrency(minCost)} - ${formatCurrency(maxCost)}`;
-
 
                 // Sidebar HTML (Standard Style)
                 html += `
@@ -855,7 +819,6 @@
                 `;
             };
 
-
             // Sidebar Rows
             if (state.step > 1) addRow('Phase 1: Blueprint', state.costs.phase1, state.costs.phase1, true);
             if (state.step > 2) addRow('Phase 2: Concept', state.costs.phase2Min, state.costs.phase2Max, true);
@@ -865,19 +828,16 @@
             }
             if (state.step > 4) addRow('Phase 3: Follow-Up', state.costs.phase3, state.costs.phase3, true);
 
-
             if (html === '') html = '<div class="text-center text-slate-400 italic text-[10px] py-4">Initializing...</div>';
             els.summaryList.innerHTML = html;
-
 
             // -- Update Step 6 (Summary Card) --
             els.summaryRowProd.textContent = formatCurrency(state.costs.prodTotal);
             els.summaryRowFollow.textContent = formatCurrency(state.costs.phase3);
-           
+            
             let totalStr = formatCurrency(minTotal);
             if (minTotal !== maxTotal) totalStr = `${formatCurrency(minTotal)} - ${formatCurrency(maxTotal)}`;
             els.finalSummaryTotal.textContent = totalStr;
-
 
             // -- Update Step 7 (Scale Table) --
             // Dynamic Headers
@@ -886,25 +846,23 @@
             const custLabel12m = newCust12m > 1 || newCust12m === 0 ? 'Clients' : 'Client';
             // Calculate label for 90 Day Pilot column specifically as 'Client/s'
             const custLabel90 = newCustomers > 1 || newCustomers === 0 ? 'Clients' : 'Client';
-           
+            
             els.scaleQty90.textContent = `${state.inputs.targets} Packages`;
             els.scaleClients90.textContent = `${formattedCust} New ${custLabel90}`;
-           
+            
             els.scaleQty12m.textContent = `${targets12m} Packages`;
             els.scaleClients12m.textContent = `${newCust12m % 1 === 0 ? newCust12m : newCust12m.toFixed(1)} New ${custLabel12m}`;
-
 
             // Rows
             els.scaleRowProd90.textContent = formatCurrency(state.costs.prodTotal);
             els.scaleRowProd12m.textContent = formatCurrency(prod12m);
             els.scaleRowFollow90.textContent = formatCurrency(state.costs.phase3);
-           
+            
             els.scaleTotal90.textContent = totalStr;
             els.scaleTotal12m.textContent = formatCurrency(total12m);
-           
+            
             els.scaleBreakeven90.textContent = formatCurrency(state.budgetLimit);
             els.scaleBreakeven12m.textContent = formatCurrency(state.budgetLimit * 4);
-
 
             // -- Calculate ROI Row (Step 7) --
             // 90 Day ROI Range: (Budget / maxTotal) to (Budget / minTotal)
@@ -921,7 +879,6 @@
             }
             els.scaleRoi90.textContent = roi90;
 
-
             // 12m ROI: (Budget*4 / total12m)
             let roi12m = "0%";
             if (total12m > 0) {
@@ -931,17 +888,13 @@
             els.scaleRoi12m.textContent = roi12m;
 
 
-
-
             // Sidebar Totals
             els.summaryTotal.textContent = totalStr;
-
 
             // Budget Logic
             const budgetPercent = state.budgetLimit > 0 ? Math.min(100, (minTotal / state.budgetLimit) * 100) : 0;
             els.budgetBar.style.width = `${budgetPercent}%`;
             els.budgetPercent.textContent = `${Math.round(budgetPercent)}%`;
-
 
             if (budgetPercent > 100) {
                 els.summaryTotal.classList.add('text-red-600');
@@ -956,7 +909,6 @@
             }
         };
 
-
         const toggleProd = (type, source) => {
             state.inputs[`${type}Source`] = source;
             const isMan = type === 'man';
@@ -965,12 +917,10 @@
             const checkMr = isMan ? 'check-man-mr' : 'check-dist-mr';
             const checkBoost = isMan ? 'check-man-boost' : 'check-dist-boost';
 
-
             const mrCard = document.getElementById(mrId);
             const boostCard = document.getElementById(boostId);
             const mrCheck = document.getElementById(checkMr);
             const boostCheck = document.getElementById(checkBoost);
-
 
             if (source === 'mr') {
                 mrCard.className = "border rounded-lg p-3 cursor-pointer transition-all card-selected relative";
@@ -986,7 +936,6 @@
             calculateTotal();
         };
 
-
         const toggleCardStyle = (id) => {
             const card = document.getElementById(`card-${id}`);
             const checkbox = document.getElementById(`check-${id}`);
@@ -1000,13 +949,11 @@
             calculateTotal();
         };
 
-
         const nav = (dir) => {
             if (dir === 'next' && state.step < state.totalSteps) state.step++;
             if (dir === 'back' && state.step > 1) state.step--;
             updateScreen();
         };
-
 
         const updateScreen = () => {
             els.screens.forEach(s => {
@@ -1014,12 +961,10 @@
                 s.classList.add('step-hidden');
             });
 
-
             const current = els.screens[state.step - 1];
             current.classList.remove('step-hidden');
             void current.offsetWidth;
             current.classList.add('step-active', 'slide-in');
-
 
             els.progressBar.style.width = `${(state.step / state.totalSteps) * 100}%`;
             Array.from(els.progressLabels).forEach((label, idx) => {
@@ -1032,12 +977,10 @@
                 }
             });
 
-
             els.btnBack.disabled = state.step === 1;
             els.btnNext.innerHTML = state.step === state.totalSteps ?
                 `Finish <i data-lucide="check" class="w-3 h-3"></i>` :
                 `Next Step <i data-lucide="arrow-right" class="w-3 h-3"></i>`;
-
 
             // Layout Switching Logic for Step 7
             if (state.step === 7) {
@@ -1054,11 +997,9 @@
                 els.layoutMain.classList.remove('lg:col-span-12');
             }
 
-
             updateSidebar();
             lucide.createIcons();
         };
-
 
         // --- LISTENERS ---
         els.targets.addEventListener('input', calculateTotal);
@@ -1068,10 +1009,8 @@
         els.margin.addEventListener('input', calculateTotal);
         els.manCost.addEventListener('input', calculateTotal);
 
-
         els.btnNext.addEventListener('click', () => nav('next'));
         els.btnBack.addEventListener('click', () => nav('back'));
-
 
         // --- INIT ---
         toggleProd('man', 'mr');
@@ -1081,7 +1020,6 @@
         toggleCardStyle('lp');
         calculateTotal();
         lucide.createIcons();
-
 
     </script>
 </body>
