@@ -397,8 +397,8 @@
                                     </div>
 
                                     <!-- Option 1 -->
-                                    <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-300 bg-slate-50 cursor-pointer transition-all relative group">
-                                        <input type="checkbox" id="check-nurture" class="mt-0.5 w-4 h-4 accent-slate-900" checked onchange="calculateTotal()">
+                                    <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-900 bg-slate-100 cursor-pointer transition-all relative group" id="card-nurture">
+                                        <input type="checkbox" id="check-nurture" class="mt-0.5 w-4 h-4 accent-slate-900" checked onchange="toggleCardStyle('nurture')">
                                         <div>
                                             <div class="flex justify-between w-full">
                                                 <span class="font-bold text-slate-900 text-xs">Follow-Up Nurture Comms</span>
@@ -1001,6 +1001,7 @@
         // --- INIT ---
         toggleProd('man', 'mr');
         toggleProd('dist', 'mr'); 
+        toggleCardStyle('nurture');
         toggleCardStyle('deck');
         toggleCardStyle('lp');
         calculateTotal();
