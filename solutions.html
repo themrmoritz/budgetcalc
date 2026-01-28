@@ -9,13 +9,15 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
         /* Global Text Scale Increase (10%) */
         html { font-size: 110%; }
 
-        body { font-family: 'Inter', sans-serif; }
+        /* Typography Override */
+        body { font-family: 'Inter', sans-serif; background-color: #FDFBF7; /* Cream Background */ }
+        h1, h2, h3, .serif-font { font-family: 'Playfair Display', serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         
         /* Compact Scaling for 1366x768 optimization */
@@ -24,13 +26,13 @@
             transform-origin: top center;
         }
         
-        /* Custom Range Slider Styling */
+        /* Custom Range Slider Styling - Medical Orange/Red */
         .slider-thumb::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 18px;
-            height: 18px;
-            background: #0f172a;
+            width: 20px;
+            height: 20px;
+            background: #EA580C; /* Orange-600 */
             cursor: pointer;
             border-radius: 50%;
             transition: transform 0.1s;
@@ -54,9 +56,9 @@
 
         /* Scrollbar */
         .custom-scroll::-webkit-scrollbar { width: 5px; }
-        .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .custom-scroll::-webkit-scrollbar-track { background: #e5e5e5; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #a3a3a3; border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #737373; }
 
         /* Sticky Sidebar Utilities */
         .sticky-sidebar {
@@ -66,83 +68,86 @@
             overflow-y: auto;
         }
 
-        /* Card Selection Styles */
+        /* Card Selection Styles - Medical/Clean Look */
         .card-selected {
             border-color: #0f172a;
-            background-color: #f8fafc;
-            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: translateY(-1px);
         }
         .card-unselected {
-            border-color: #e2e8f0;
-            background-color: #ffffff;
-            opacity: 0.8;
+            border-color: #e5e7eb;
+            background-color: #ffffff; /* White cards on cream bg */
+            opacity: 0.7;
         }
         .card-unselected:hover {
             opacity: 1;
-            border-color: #94a3b8;
+            border-color: #9ca3af;
         }
         
         .card-permanent {
             border-color: #0f172a;
-            background-color: #f8fafc;
+            background-color: #ffffff;
             opacity: 1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         /* Scale up bottom rows of final table by 25% */
         .super-size-text { font-size: 1.25em; }
     </style>
 </head>
-<body class="bg-white min-h-screen text-slate-800 flex justify-center items-start overflow-x-hidden text-sm">
+<body class="min-h-screen text-slate-800 flex justify-center items-start overflow-x-hidden text-sm">
 
     <!-- Scaled Wrapper -->
     <div class="app-container w-full max-w-[1280px] p-2">
         
         <!-- Main Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 relative">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 relative">
             
             <!-- LEFT COLUMN: MAIN CONTENT -->
-            <div id="layout-main" class="col-span-1 lg:col-span-8 bg-white rounded-[1.5rem] shadow-xl border border-slate-200 min-h-[500px] flex flex-col relative overflow-hidden transition-all duration-300">
+            <div id="layout-main" class="col-span-1 lg:col-span-8 bg-white rounded-[1.5rem] shadow-xl border border-stone-200 min-h-[600px] flex flex-col relative overflow-hidden transition-all duration-300">
                 
                 <!-- Progress Indicator -->
-                <div class="px-6 py-4 border-b border-slate-100">
-                    <div class="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2" id="progress-labels">
+                <div class="px-8 py-6 border-b border-stone-100">
+                    <div class="flex justify-between text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2" id="progress-labels">
                         <span>ROI</span>
-                        <span>Blueprint</span>
-                        <span>Concept</span>
+                        <span>Strategy</span>
+                        <span>Creative</span>
                         <span>Prod</span>
-                        <span>Follow Up</span>
+                        <span>Content</span>
                         <span>Summary</span>
                         <span>Scale</span>
                     </div>
-                    <div class="h-1 bg-slate-100 rounded-full overflow-hidden">
-                        <div id="progress-fill" class="h-full bg-slate-900 transition-all duration-500 ease-out" style="width: 14%"></div>
+                    <div class="h-1 bg-stone-100 rounded-full overflow-hidden">
+                        <!-- Orange Progress Bar -->
+                        <div id="progress-fill" class="h-full bg-orange-600 transition-all duration-500 ease-out" style="width: 14%"></div>
                     </div>
                 </div>
 
                 <!-- CONTENT AREA -->
-                <div class="flex-1 p-6 md:p-8 overflow-y-auto custom-scroll relative">
+                <div class="flex-1 p-8 overflow-y-auto custom-scroll relative">
 
                     <!-- STEP 1: ROI PILOT BUDGET -->
                     <div id="step-1" class="step-active slide-in">
-                        <!-- Updated Headline & Subhead -->
-                        <h2 class="text-2xl font-black text-slate-900 uppercase mb-1">90 Day DM Pilot Campaign</h2>
-                        <p class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-6">ROI BUDGET</p>
+                        <!-- Updated Headline & Subhead (Serif) -->
+                        <h2 class="text-4xl font-black text-slate-900 mb-2">90 Day DM Pilot Campaign</h2>
+                        <p class="text-xs font-bold text-stone-500 uppercase tracking-widest mb-8">ROI Budget Calculator</p>
 
-                        <div class="space-y-5 max-w-3xl">
+                        <div class="space-y-6 max-w-3xl">
                             <!-- Row 1: Targets & Conv -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#FDFBF7] p-6 rounded-2xl border border-stone-200">
                                 <div>
-                                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wide mb-1 block">Target Prospects</label>
-                                    <input type="number" id="input-targets" value="50" class="w-full p-2 border border-slate-200 rounded-lg focus:border-slate-900 focus:outline-none font-bold text-slate-900 text-lg bg-white">
+                                    <label class="text-[10px] font-bold text-stone-500 uppercase tracking-wide mb-2 block">Target Prospects</label>
+                                    <input type="number" id="input-targets" value="50" class="w-full p-3 border border-stone-200 rounded-xl focus:border-slate-900 focus:outline-none font-bold text-slate-900 text-xl bg-white shadow-sm">
                                 </div>
                                 <div>
-                                    <div class="flex justify-between mb-1">
-                                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Target Conv. Rate</label>
-                                        <span id="display-conv" class="text-lg font-black text-slate-900">2.0%</span>
+                                    <div class="flex justify-between mb-2">
+                                        <label class="text-[10px] font-bold text-stone-500 uppercase tracking-wide">Target Conv. Rate</label>
+                                        <span id="display-conv" class="text-xl font-black text-slate-900">2.0%</span>
                                     </div>
-                                    <input type="range" id="input-conv" min="0.1" max="10" step="0.1" value="2.0" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
+                                    <input type="range" id="input-conv" min="0.1" max="10" step="0.1" value="2.0" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer slider-thumb">
                                     <!-- Added Labels -->
-                                    <div class="flex justify-between text-[10px] font-bold text-slate-400 mt-2 uppercase">
+                                    <div class="flex justify-between text-[10px] font-bold text-stone-400 mt-2 uppercase">
                                         <span>Conservative</span>
                                         <span>Aggressive</span>
                                     </div>
@@ -151,34 +156,33 @@
 
                             <!-- Row 2: Customer Value -->
                             <div>
-                                <h3 class="text-xs font-bold text-slate-900 uppercase mb-3 flex items-center gap-2">
-                                    <i data-lucide="calculator" class="w-3 h-3"></i>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase mb-4 flex items-center gap-2 tracking-wide">
+                                    <i data-lucide="calculator" class="w-4 h-4 text-orange-600"></i>
                                     Customer Value
                                 </h3>
                                 
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                     <!-- Spend -->
                                     <div>
-                                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wide mb-1">Annual Client Spend</label>
+                                        <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-wide mb-2">Annual Client Spend</label>
                                         <div class="relative w-full">
-                                            <span class="absolute left-3 top-2.5 text-slate-400 font-bold text-xs">$</span>
-                                            <input type="number" id="input-spend" value="75000" class="w-full p-2 pl-6 border border-slate-200 rounded-lg focus:border-slate-900 focus:outline-none font-bold text-slate-900 text-sm">
+                                            <span class="absolute left-4 top-3 text-stone-400 font-bold text-sm">$</span>
+                                            <input type="number" id="input-spend" value="75000" class="w-full p-3 pl-8 border border-stone-200 rounded-xl focus:border-slate-900 focus:outline-none font-bold text-slate-900 text-base shadow-sm">
                                         </div>
                                     </div>
                                     
                                     <!-- Tenure -->
                                     <div>
-                                        <!-- Removed "(Years)" from label -->
-                                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wide mb-1">Client Tenure</label>
-                                        <div class="flex items-center gap-2">
+                                        <label class="block text-[10px] font-bold text-stone-500 uppercase tracking-wide mb-2">Client Tenure</label>
+                                        <div class="flex items-center gap-3">
                                             <div class="flex-grow">
-                                                <input type="range" id="input-tenure" min="1" max="10" step="1" value="1" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
-                                                <div class="flex justify-between text-[9px] font-bold text-slate-400 mt-1 uppercase">
+                                                <input type="range" id="input-tenure" min="1" max="10" step="1" value="1" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer slider-thumb">
+                                                <div class="flex justify-between text-[9px] font-bold text-stone-400 mt-2 uppercase">
                                                     <span>1yr</span>
                                                     <span>10yr</span>
                                                 </div>
                                             </div>
-                                            <div class="w-10 h-8 bg-white border border-slate-200 rounded flex items-center justify-center font-black text-slate-900 shadow-sm text-sm">
+                                            <div class="w-12 h-10 bg-white border border-stone-200 rounded-lg flex items-center justify-center font-black text-slate-900 shadow-sm text-base">
                                                 <span id="display-tenure">1</span>
                                             </div>
                                         </div>
@@ -186,27 +190,27 @@
                                 </div>
                                 
                                 <!-- Break Even Calculation Row -->
-                                <div class="p-3 bg-slate-100 rounded-xl border border-slate-200 flex flex-col md:flex-row justify-between items-center gap-3">
+                                <div class="p-4 bg-stone-100 rounded-2xl border border-stone-200 flex flex-col md:flex-row justify-between items-center gap-4">
                                     <div class="flex flex-col">
-                                        <span class="text-[9px] font-bold text-slate-500 uppercase mb-0.5">Client LTV</span>
-                                        <span id="display-ltv" class="text-lg font-black text-slate-900">$75,000</span>
+                                        <span class="text-[10px] font-bold text-stone-500 uppercase mb-1">Client LTV</span>
+                                        <span id="display-ltv" class="text-2xl font-black text-slate-900">$75,000</span>
                                     </div>
                                     
-                                    <div class="text-slate-400 font-bold text-lg">×</div>
+                                    <div class="text-stone-300 font-black text-xl">×</div>
                                     
                                     <div class="flex flex-col">
-                                        <label class="text-[9px] font-bold text-slate-500 uppercase mb-0.5">Profit Margin</label>
-                                        <div class="flex items-center gap-1 bg-white px-2 py-0.5 rounded border border-slate-300">
-                                            <input type="number" id="input-margin" value="37" class="bg-transparent font-bold text-slate-900 text-sm w-10 focus:outline-none text-center">
-                                            <span class="text-slate-400 font-bold text-xs">%</span>
+                                        <label class="text-[10px] font-bold text-stone-500 uppercase mb-1">Profit Margin</label>
+                                        <div class="flex items-center gap-1 bg-white px-3 py-1 rounded-lg border border-stone-300 shadow-sm">
+                                            <input type="number" id="input-margin" value="37" class="bg-transparent font-bold text-slate-900 text-base w-12 focus:outline-none text-center">
+                                            <span class="text-stone-400 font-bold text-xs">%</span>
                                         </div>
                                     </div>
 
-                                    <div class="text-slate-400 font-bold text-lg">=</div>
+                                    <div class="text-stone-300 font-black text-xl">=</div>
 
                                     <div class="flex flex-col items-end">
-                                        <span class="text-[9px] font-bold text-slate-500 uppercase mb-0.5">Break Even Ceiling</span>
-                                        <span id="display-breakeven-row" class="text-xl font-black text-emerald-600">$27,750</span>
+                                        <span class="text-[10px] font-bold text-stone-500 uppercase mb-1">Break Even Ceiling</span>
+                                        <span id="display-breakeven-row" class="text-2xl font-black text-emerald-600">$27,750</span>
                                     </div>
                                 </div>
                             </div>
@@ -215,34 +219,33 @@
 
                     <!-- STEP 2: BLUEPRINT -->
                     <div id="step-2" class="step-hidden slide-in">
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
                             <!-- Content -->
                             <div>
-                                <h2 class="text-2xl font-black text-slate-900 mb-1">Phase 1: The Blueprint</h2>
-                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Strategy & Narrative</h3>
-                                <p class="text-slate-400 text-[10px] font-medium mb-4">One-time investment. Foundation for all future marketing.</p>
+                                <h2 class="text-4xl font-black text-slate-900 mb-2">Strategy</h2>
+                                <p class="text-stone-500 text-xs font-medium mb-6">One-time investment. Foundation for all future marketing.</p>
                                 
                                 <!-- Checklist -->
-                                <ul class="space-y-3 mb-4">
-                                    <li class="flex items-start gap-3 p-3 bg-white border border-slate-100 rounded-lg shadow-sm">
-                                        <div class="mt-0.5"><i data-lucide="check" class="w-4 h-4 text-slate-900"></i></div>
+                                <ul class="space-y-4 mb-6">
+                                    <li class="flex items-start gap-4 p-4 bg-white border border-stone-100 rounded-xl shadow-sm">
+                                        <div class="mt-0.5 text-orange-600"><i data-lucide="check-circle-2" class="w-5 h-5"></i></div>
                                         <div>
-                                            <span class="font-bold text-slate-900 text-xs block">Strategy Workshop</span>
-                                            <span class="text-[10px] text-slate-500 block mt-0.5 leading-relaxed">One half-day session to extract the 'hidden assets' (ie. the wholesale story, the tech, the warehouse scale).</span>
+                                            <span class="font-bold text-slate-900 text-sm block serif-font">Strategy Workshop</span>
+                                            <span class="text-[11px] text-stone-500 block mt-1 leading-relaxed">One half-day session to extract the 'hidden assets' (ie. the wholesale story, the tech, the warehouse scale).</span>
                                         </div>
                                     </li>
-                                    <li class="flex items-start gap-3 p-3 bg-white border border-slate-100 rounded-lg shadow-sm">
-                                        <div class="mt-0.5"><i data-lucide="check" class="w-4 h-4 text-slate-900"></i></div>
+                                    <li class="flex items-start gap-4 p-4 bg-white border border-stone-100 rounded-xl shadow-sm">
+                                        <div class="mt-0.5 text-orange-600"><i data-lucide="check-circle-2" class="w-5 h-5"></i></div>
                                         <div>
-                                            <span class="font-bold text-slate-900 text-xs block">Strategic Narrative Document</span>
-                                            <span class="text-[10px] text-slate-500 block mt-0.5 leading-relaxed">The core messaging bible. This gives your sales team the language to differentiate the Boost offering.</span>
+                                            <span class="font-bold text-slate-900 text-sm block serif-font">Strategic Narrative Document</span>
+                                            <span class="text-[11px] text-stone-500 block mt-1 leading-relaxed">The core messaging bible. This gives your sales team the language to differentiate the Boost offering.</span>
                                         </div>
                                     </li>
-                                    <li class="flex items-start gap-3 p-3 bg-white border border-slate-100 rounded-lg shadow-sm">
-                                        <div class="mt-0.5"><i data-lucide="check" class="w-4 h-4 text-slate-900"></i></div>
+                                    <li class="flex items-start gap-4 p-4 bg-white border border-stone-100 rounded-xl shadow-sm">
+                                        <div class="mt-0.5 text-orange-600"><i data-lucide="check-circle-2" class="w-5 h-5"></i></div>
                                         <div>
-                                            <span class="font-bold text-slate-900 text-xs block">Campaign Attack Plan</span>
-                                            <span class="text-[10px] text-slate-500 block mt-0.5 leading-relaxed">The specific timeline and targeting list scrub for the top 200 prospects.</span>
+                                            <span class="font-bold text-slate-900 text-sm block serif-font">Campaign Attack Plan</span>
+                                            <span class="text-[11px] text-stone-500 block mt-1 leading-relaxed">The specific timeline and targeting list scrub for the top 200 prospects.</span>
                                         </div>
                                     </li>
                                 </ul>
@@ -250,9 +253,10 @@
                             
                             <!-- Price Card -->
                             <div class="flex items-center justify-center">
-                                <div class="w-full bg-slate-50 text-slate-900 p-6 rounded-2xl text-center shadow-md border border-slate-100 relative overflow-hidden">
-                                    <span class="block text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Phase 1 Investment</span>
-                                    <div class="text-4xl font-bold tracking-tight mb-2">$5,000</div>
+                                <div class="w-full bg-[#FDFBF7] text-slate-900 p-8 rounded-3xl text-center border-2 border-stone-200 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-2 bg-orange-600"></div>
+                                    <span class="block text-stone-400 text-[10px] font-bold uppercase tracking-widest mb-2 mt-4">Phase 1 Investment</span>
+                                    <div class="text-5xl font-black tracking-tight mb-4 serif-font">$5,000</div>
                                 </div>
                             </div>
                         </div>
@@ -260,28 +264,24 @@
 
                     <!-- STEP 3: CREATIVE -->
                     <div id="step-3" class="step-hidden slide-in">
-                        <div class="mb-4">
-                            <h2 class="text-2xl font-black text-slate-900 mb-1">Phase 2: Package Concept</h2>
-                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">DM Creative Development</h3>
+                        <div class="mb-6">
+                            <h2 class="text-4xl font-black text-slate-900 mb-2">DM Creative</h2>
+                            <p class="text-stone-500 text-xs font-medium">Ideation and development of the physical gift and unboxing experience.</p>
                         </div>
 
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
                             <div>
-                                <p class="text-slate-600 mb-4 leading-relaxed text-xs">
-                                    Ideation and development of the physical gift and unboxing experience.
-                                </p>
-
-                                <ul class="space-y-2 mb-4">
-                                    <li class="flex items-center gap-3 p-2 bg-white border border-slate-100 rounded-lg shadow-sm">
-                                        <i data-lucide="check" class="w-4 h-4 text-slate-900"></i>
+                                <ul class="space-y-3 mb-6">
+                                    <li class="flex items-center gap-3 p-3 bg-white border border-stone-100 rounded-xl shadow-sm">
+                                        <i data-lucide="check" class="w-4 h-4 text-orange-600"></i>
                                         <span class="font-bold text-slate-700 text-xs">Creative Strategy & Ideation</span>
                                     </li>
-                                    <li class="flex items-center gap-3 p-2 bg-white border border-slate-100 rounded-lg shadow-sm">
-                                        <i data-lucide="check" class="w-4 h-4 text-slate-900"></i>
+                                    <li class="flex items-center gap-3 p-3 bg-white border border-stone-100 rounded-xl shadow-sm">
+                                        <i data-lucide="check" class="w-4 h-4 text-orange-600"></i>
                                         <span class="font-bold text-slate-700 text-xs">Copywriting & Design</span>
                                     </li>
-                                    <li class="flex items-center gap-3 p-2 bg-white border border-slate-100 rounded-lg shadow-sm">
-                                        <i data-lucide="check" class="w-4 h-4 text-slate-900"></i>
+                                    <li class="flex items-center gap-3 p-3 bg-white border border-stone-100 rounded-xl shadow-sm">
+                                        <i data-lucide="check" class="w-4 h-4 text-orange-600"></i>
                                         <span class="font-bold text-slate-700 text-xs">Digital File Prep</span>
                                     </li>
                                 </ul>
@@ -289,10 +289,11 @@
                             
                             <!-- Price Card -->
                             <div class="flex items-center justify-center">
-                                <div class="w-full bg-slate-50 text-slate-900 p-6 rounded-2xl text-center shadow-md border border-slate-100 relative overflow-hidden">
-                                    <span class="block text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Phase 2 Investment</span>
-                                    <div class="text-3xl font-bold tracking-tight mb-2">$5k - $7.5k</div>
-                                    <p class="text-slate-400 text-[10px] font-medium max-w-[240px] mx-auto mt-2">Range depends on concept intricacy. Includes content & packaging design.</p>
+                                <div class="w-full bg-[#FDFBF7] text-slate-900 p-8 rounded-3xl text-center border-2 border-stone-200 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-2 bg-orange-600"></div>
+                                    <span class="block text-stone-400 text-[10px] font-bold uppercase tracking-widest mb-2 mt-4">Phase 2 Investment</span>
+                                    <div class="text-4xl font-black tracking-tight mb-2 serif-font">$5k - $7.5k</div>
+                                    <p class="text-stone-400 text-[10px] font-medium max-w-[240px] mx-auto mt-2">Range depends on concept intricacy. Includes content & packaging design.</p>
                                 </div>
                             </div>
                         </div>
@@ -300,40 +301,40 @@
 
                     <!-- STEP 4: PRODUCTION (Redesigned) -->
                     <div id="step-4" class="step-hidden slide-in">
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
                             <!-- Left Column: Content & Input -->
                             <div>
-                                <h2 class="text-2xl font-black text-slate-900 mb-1">Phase 2b: DM Production</h2>
-                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Manufacturing</h3>
-                                <p class="text-slate-400 text-[10px] font-medium mb-6">Execution of the physical packages for the pilot campaign.</p>
+                                <h2 class="text-4xl font-black text-slate-900 mb-2">DM Production</h2>
+                                <p class="text-stone-500 text-xs font-medium mb-6">Execution of the physical packages for the pilot campaign.</p>
                                 
-                                <ul class="space-y-3 mb-6">
-                                    <li class="flex items-start gap-3 p-3 bg-white border border-slate-100 rounded-lg shadow-sm">
-                                        <div class="mt-0.5"><i data-lucide="package" class="w-4 h-4 text-slate-900"></i></div>
+                                <ul class="space-y-4 mb-8">
+                                    <li class="flex items-start gap-4 p-4 bg-white border border-stone-100 rounded-xl shadow-sm">
+                                        <div class="mt-0.5 text-orange-600"><i data-lucide="package" class="w-5 h-5"></i></div>
                                         <div>
-                                            <span class="font-bold text-slate-900 text-xs block">Manufacturing & Assembly</span>
-                                            <span class="text-[10px] text-slate-500 block mt-0.5 leading-relaxed">Production of boxes, printed materials, and gift items based on the approved concept.</span>
+                                            <span class="font-bold text-slate-900 text-sm block serif-font">Manufacturing & Assembly</span>
+                                            <span class="text-[11px] text-stone-500 block mt-1 leading-relaxed">Production of boxes, printed materials, and gift items based on the approved concept.</span>
                                         </div>
                                     </li>
                                 </ul>
 
                                 <!-- Cost Input -->
-                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wide mb-1 block">Est. Cost Per Package</label>
+                                <div class="bg-[#FDFBF7] p-6 rounded-2xl border border-stone-200">
+                                    <label class="text-[10px] font-bold text-stone-500 uppercase tracking-wide mb-2 block">Est. Cost Per Package</label>
                                     <div class="relative w-full">
-                                        <span class="absolute left-3 top-2.5 text-slate-400 font-bold text-xs">$</span>
-                                        <input type="number" id="input-man-cost" value="100" class="w-full p-2 pl-6 border border-slate-200 rounded-lg focus:border-slate-900 focus:outline-none font-bold text-slate-900 text-lg bg-white">
+                                        <span class="absolute left-4 top-3 text-stone-400 font-bold text-sm">$</span>
+                                        <input type="number" id="input-man-cost" value="100" class="w-full p-3 pl-8 border border-stone-200 rounded-xl focus:border-slate-900 focus:outline-none font-bold text-slate-900 text-lg bg-white shadow-sm">
                                     </div>
-                                    <p class="text-[9px] text-slate-400 mt-2 italic">Calculated against <span id="prod-target-display" class="font-bold text-slate-600">50</span> targets.</p>
+                                    <p class="text-[10px] text-stone-400 mt-3 italic">Calculated against <span id="prod-target-display" class="font-bold text-slate-600">50</span> targets.</p>
                                 </div>
                             </div>
                             
                             <!-- Right Column: Price Card -->
                             <div class="flex items-center justify-center">
-                                <div class="w-full bg-slate-50 text-slate-900 p-6 rounded-2xl text-center shadow-md border border-slate-100 relative overflow-hidden">
-                                    <span class="block text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Phase 2b Investment</span>
-                                    <div class="text-4xl font-bold tracking-tight mb-2" id="display-phase2b-total">$5,000</div>
-                                    <p class="text-slate-400 text-[10px] font-medium max-w-[200px] mx-auto mt-2">Total manufacturing cost for the pilot batch.</p>
+                                <div class="w-full bg-[#FDFBF7] text-slate-900 p-8 rounded-3xl text-center border-2 border-stone-200 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-2 bg-orange-600"></div>
+                                    <span class="block text-stone-400 text-[10px] font-bold uppercase tracking-widest mb-2 mt-4">Phase 2b Investment</span>
+                                    <div class="text-5xl font-black tracking-tight mb-2 serif-font" id="display-phase2b-total">$5,000</div>
+                                    <p class="text-stone-400 text-[10px] font-medium max-w-[200px] mx-auto mt-2">Total manufacturing cost for the pilot batch.</p>
                                 </div>
                             </div>
                         </div>
@@ -341,57 +342,57 @@
 
                     <!-- STEP 5: FOLLOW UP -->
                     <div id="step-5" class="step-hidden slide-in">
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
                             <div>
-                                <h2 class="text-2xl font-black text-slate-900 mb-1">Phase 3: The Follow-Up</h2>
-                                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Sales Enablement</h3>
+                                <h2 class="text-4xl font-black text-slate-900 mb-2">Sales Content Support</h2>
+                                <h3 class="text-xs font-bold text-stone-500 uppercase tracking-wider mb-6">Sales Enablement</h3>
                                 
-                                <div class="space-y-3">
+                                <div class="space-y-4">
                                     <!-- Required Item -->
-                                    <div class="flex items-start gap-3 p-3 rounded-xl border-2 card-permanent">
+                                    <div class="flex items-start gap-4 p-4 rounded-xl border-2 card-permanent">
                                         <div class="flex-1">
                                             <div class="flex justify-between w-full">
-                                                <span class="font-bold text-slate-900 text-xs">Project + Creative Support</span>
-                                                <span class="font-bold text-slate-600 text-xs">$1,500/mo</span>
+                                                <span class="font-bold text-slate-900 text-sm serif-font">Project + Creative Support</span>
+                                                <span class="font-bold text-slate-600 text-sm">$1,500/mo</span>
                                             </div>
-                                            <p class="text-[10px] text-slate-500 mt-0.5">Ongoing campaign management (90 Days).</p>
+                                            <p class="text-[11px] text-stone-500 mt-1">Ongoing campaign management (90 Days).</p>
                                         </div>
                                     </div>
 
                                     <!-- Option 1 -->
-                                    <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-900 bg-slate-100 cursor-pointer transition-all relative group" id="card-nurture">
+                                    <label class="flex items-start gap-4 p-4 rounded-xl border border-slate-900 bg-stone-50 cursor-pointer transition-all relative group" id="card-nurture">
                                         <input type="checkbox" id="check-nurture" class="mt-0.5 w-4 h-4 accent-slate-900" checked onchange="toggleCardStyle('nurture')">
                                         <div>
                                             <div class="flex justify-between w-full">
-                                                <span class="font-bold text-slate-900 text-xs">Follow-Up Nurture Comms</span>
-                                                <span class="font-bold text-slate-600 text-xs">+$750</span>
+                                                <span class="font-bold text-slate-900 text-sm serif-font">Follow-Up Nurture Comms</span>
+                                                <span class="font-bold text-slate-600 text-sm">+$750</span>
                                             </div>
                                             <!-- Updated Text -->
-                                            <p class="text-[10px] text-slate-500 mt-0.5">Messaging journey & copy.</p>
+                                            <p class="text-[11px] text-stone-500 mt-1">Messaging journey & copy.</p>
                                         </div>
                                     </label>
 
                                     <!-- Option 2 -->
-                                    <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-300 bg-slate-50 cursor-pointer transition-all relative group" id="card-deck">
+                                    <label class="flex items-start gap-4 p-4 rounded-xl border border-stone-300 bg-white cursor-pointer transition-all relative group" id="card-deck">
                                         <input type="checkbox" id="check-deck" class="mt-0.5 w-4 h-4 accent-slate-900" checked onchange="toggleCardStyle('deck')">
                                         <div>
                                             <div class="flex justify-between w-full">
-                                                <span class="font-bold text-slate-900 text-xs">"Closer" Sales Deck</span>
-                                                <span class="font-bold text-slate-600 text-xs">+$2,500</span>
+                                                <span class="font-bold text-slate-900 text-sm serif-font">"Closer" Sales Deck</span>
+                                                <span class="font-bold text-slate-600 text-sm">+$2,500</span>
                                             </div>
-                                            <p class="text-[10px] text-slate-500 mt-0.5">Scripting & design for leave-behind deck.</p>
+                                            <p class="text-[11px] text-stone-500 mt-1">Scripting & design for leave-behind deck.</p>
                                         </div>
                                     </label>
 
                                     <!-- Option 3 -->
-                                    <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-300 bg-slate-50 cursor-pointer transition-all relative group" id="card-lp">
+                                    <label class="flex items-start gap-4 p-4 rounded-xl border border-stone-300 bg-white cursor-pointer transition-all relative group" id="card-lp">
                                         <input type="checkbox" id="check-lp" class="mt-0.5 w-4 h-4 accent-slate-900" checked onchange="toggleCardStyle('lp')">
                                         <div>
                                             <div class="flex justify-between w-full">
-                                                <span class="font-bold text-slate-900 text-xs">Campaign Landing Page</span>
-                                                <span class="font-bold text-slate-600 text-xs">+$2,000</span>
+                                                <span class="font-bold text-slate-900 text-sm serif-font">Campaign Landing Page</span>
+                                                <span class="font-bold text-slate-600 text-sm">+$2,000</span>
                                             </div>
-                                            <p class="text-[10px] text-slate-500 mt-0.5">Copy & design optimised for conversion.</p>
+                                            <p class="text-[11px] text-stone-500 mt-1">Copy & design optimised for conversion.</p>
                                         </div>
                                     </label>
                                 </div>
@@ -399,9 +400,10 @@
                             
                             <!-- Dynamic Price Card -->
                             <div class="flex items-center justify-center">
-                                <div class="w-full bg-slate-50 text-slate-900 p-6 rounded-2xl text-center shadow-md border border-slate-100 relative overflow-hidden">
-                                    <span class="block text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Phase 3 Investment</span>
-                                    <div class="text-4xl font-bold tracking-tight mb-2" id="display-phase3-total">$9,250</div>
+                                <div class="w-full bg-[#FDFBF7] text-slate-900 p-8 rounded-3xl text-center border-2 border-stone-200 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-2 bg-orange-600"></div>
+                                    <span class="block text-stone-400 text-[10px] font-bold uppercase tracking-widest mb-2 mt-4">Phase 3 Investment</span>
+                                    <div class="text-5xl font-black tracking-tight mb-2 serif-font" id="display-phase3-total">$9,250</div>
                                 </div>
                             </div>
                         </div>
@@ -409,109 +411,109 @@
 
                     <!-- STEP 6: SUMMARY PAGE -->
                     <div id="step-6" class="step-hidden slide-in">
-                        <div class="text-center mb-6">
-                            <h2 class="text-3xl font-black text-slate-900 mb-1">Campaign Ready</h2>
-                            <p class="text-slate-500 text-xs">Review your configured B2B Pain Relief campaign.</p>
+                        <div class="text-center mb-8">
+                            <h2 class="text-4xl font-black text-slate-900 mb-2">Campaign Ready</h2>
+                            <p class="text-stone-500 text-sm font-medium">Review your configured B2B Pain Relief campaign.</p>
                         </div>
 
-                        <div class="bg-slate-200 border border-slate-300 rounded-lg overflow-hidden max-w-xl mx-auto shadow-md">
+                        <div class="bg-white border border-stone-200 rounded-2xl overflow-hidden max-w-xl mx-auto shadow-xl">
                             <!-- Header -->
-                            <div class="p-4 flex justify-between items-center border-b border-slate-300">
-                                <h3 class="font-black text-slate-900 uppercase text-sm tracking-tight">LINE ITEM BREAKDOWN</h3>
-                                <span class="bg-slate-900 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">90 Day Pilot</span>
+                            <div class="p-6 flex justify-between items-center border-b border-stone-200 bg-stone-50">
+                                <h3 class="font-black text-slate-900 uppercase text-sm tracking-widest">LINE ITEM BREAKDOWN</h3>
+                                <span class="bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">90 Day Pilot</span>
                             </div>
                             
                             <!-- List Items -->
-                            <div class="divide-y divide-slate-300">
-                                <div class="p-4 flex justify-between items-center bg-white/50 text-xs">
-                                    <span class="font-medium text-slate-700">1. Blueprint</span>
+                            <div class="divide-y divide-stone-100">
+                                <div class="p-5 flex justify-between items-center text-sm">
+                                    <span class="font-bold text-slate-700 serif-font">1. Blueprint</span>
                                     <span class="font-bold text-slate-900">$5,000</span>
                                 </div>
-                                <div class="p-4 flex justify-between items-center bg-white/50 text-xs">
-                                    <span class="font-medium text-slate-700">2. Creative</span>
+                                <div class="p-5 flex justify-between items-center text-sm">
+                                    <span class="font-bold text-slate-700 serif-font">2. Creative</span>
                                     <span class="font-bold text-slate-900">$5,000 - $7,500</span>
                                 </div>
-                                <div class="p-4 flex justify-between items-center bg-white/50 text-xs">
-                                    <span class="font-medium text-slate-700">2B. Production</span>
+                                <div class="p-5 flex justify-between items-center text-sm">
+                                    <span class="font-bold text-slate-700 serif-font">2B. Production</span>
                                     <span class="font-bold text-slate-900" id="summary-row-prod">$0</span>
                                 </div>
-                                <div class="p-4 flex justify-between items-center bg-white/50 text-xs">
-                                    <span class="font-medium text-slate-700">3. Follow-Up</span>
+                                <div class="p-5 flex justify-between items-center text-sm">
+                                    <span class="font-bold text-slate-700 serif-font">3. Follow-Up</span>
                                     <span class="font-bold text-slate-900" id="summary-row-follow">$0</span>
                                 </div>
                             </div>
 
                             <!-- Footer Total -->
-                            <div class="p-4 bg-slate-900 text-white flex justify-between items-center">
-                                <span class="font-medium text-slate-400 text-xs">Total Investment Range</span>
-                                <span class="text-xl font-bold" id="final-summary-total">$0</span>
+                            <div class="p-6 bg-slate-900 text-white flex justify-between items-center">
+                                <span class="font-medium text-stone-400 text-xs uppercase tracking-widest">Total Investment Range</span>
+                                <span class="text-2xl font-black serif-font" id="final-summary-total">$0</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- STEP 7: SCALE COMPARISON -->
                     <div id="step-7" class="step-hidden slide-in">
-                        <div class="text-center mb-6">
+                        <div class="text-center mb-8">
                             <!-- Updated Headline -->
-                            <h2 class="text-2xl font-black text-slate-900 mb-1">DM Campaign Scale Projection</h2>
-                            <p class="text-slate-500 text-xs">Compare your pilot investment with the 12-month rollout.</p>
+                            <h2 class="text-4xl font-black text-slate-900 mb-2">DM Campaign Scale Projection</h2>
+                            <p class="text-stone-500 text-sm font-medium">Compare your pilot investment with the 12-month rollout.</p>
                         </div>
 
-                        <div class="bg-white border-2 border-slate-100 rounded-2xl overflow-hidden max-w-4xl mx-auto shadow-lg text-xs">
+                        <div class="bg-white border-2 border-stone-100 rounded-3xl overflow-hidden max-w-4xl mx-auto shadow-xl text-sm">
                             <table class="w-full">
-                                <thead class="bg-slate-50 border-b border-slate-200">
+                                <thead class="bg-stone-50 border-b border-stone-200">
                                     <tr>
-                                        <th class="p-4 text-left font-black text-slate-900 uppercase w-1/3">Line Item</th>
-                                        <th class="p-4 text-right font-black text-slate-900 uppercase w-1/3">
+                                        <th class="p-6 text-left font-black text-slate-900 uppercase w-1/3 tracking-wide">Line Item</th>
+                                        <th class="p-6 text-right font-black text-slate-900 uppercase w-1/3 tracking-wide">
                                             90 Day Pilot
-                                            <span class="block text-[10px] text-slate-500 font-medium normal-case mt-0.5" id="scale-qty-90">50 Packages</span>
-                                            <span class="block text-[9px] text-emerald-600 font-bold normal-case mt-0.5" id="scale-clients-90">1 New Client</span>
+                                            <span class="block text-[10px] text-stone-500 font-medium normal-case mt-1" id="scale-qty-90">50 Packages</span>
+                                            <span class="block text-[10px] text-orange-600 font-bold normal-case mt-0.5" id="scale-clients-90">1 New Client</span>
                                         </th>
-                                        <th class="p-4 text-right font-black text-slate-900 uppercase bg-slate-100 w-1/3">
+                                        <th class="p-6 text-right font-black text-slate-900 uppercase bg-stone-100 w-1/3 tracking-wide">
                                             12 Month Campaign
-                                            <span class="block text-[10px] text-slate-500 font-medium normal-case mt-0.5" id="scale-qty-12m">200 Packages</span>
-                                            <span class="block text-[9px] text-emerald-600 font-bold normal-case mt-0.5" id="scale-clients-12m">4 New Clients</span>
+                                            <span class="block text-[10px] text-stone-500 font-medium normal-case mt-1" id="scale-qty-12m">200 Packages</span>
+                                            <span class="block text-[10px] text-orange-600 font-bold normal-case mt-0.5" id="scale-clients-12m">4 New Clients</span>
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-slate-100">
+                                <tbody class="divide-y divide-stone-100">
                                     <tr>
-                                        <td class="p-4 font-bold text-slate-700">Blueprint</td>
-                                        <td class="p-4 text-right font-medium text-slate-900">$5,000</td>
-                                        <td class="p-4 text-right font-medium text-slate-500 bg-slate-50">$0</td>
+                                        <td class="p-6 font-bold text-slate-700 serif-font">Blueprint</td>
+                                        <td class="p-6 text-right font-medium text-slate-900">$5,000</td>
+                                        <td class="p-6 text-right font-medium text-stone-500 bg-stone-50">$0</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-4 font-bold text-slate-700">Creative</td>
-                                        <td class="p-4 text-right font-medium text-slate-900">$5,000 - $7,500</td>
-                                        <td class="p-4 text-right font-medium text-slate-500 bg-slate-50">$0</td>
+                                        <td class="p-6 font-bold text-slate-700 serif-font">Creative</td>
+                                        <td class="p-6 text-right font-medium text-slate-900">$5,000 - $7,500</td>
+                                        <td class="p-6 text-right font-medium text-stone-500 bg-stone-50">$0</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-4 font-bold text-slate-700">Production</td>
-                                        <td class="p-4 text-right font-medium text-slate-900" id="scale-row-prod-90">$0</td>
-                                        <td class="p-4 text-right font-medium text-slate-900 bg-slate-50" id="scale-row-prod-12m">$0</td>
+                                        <td class="p-6 font-bold text-slate-700 serif-font">Production</td>
+                                        <td class="p-6 text-right font-medium text-slate-900" id="scale-row-prod-90">$0</td>
+                                        <td class="p-6 text-right font-medium text-slate-900 bg-stone-50" id="scale-row-prod-12m">$0</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-4 font-bold text-slate-700">Follow-Up</td>
-                                        <td class="p-4 text-right font-medium text-slate-900" id="scale-row-follow-90">$0</td>
-                                        <td class="p-4 text-right font-medium text-slate-900 bg-slate-50">$6,000</td>
+                                        <td class="p-6 font-bold text-slate-700 serif-font">Follow-Up</td>
+                                        <td class="p-6 text-right font-medium text-slate-900" id="scale-row-follow-90">$0</td>
+                                        <td class="p-6 text-right font-medium text-slate-900 bg-stone-50">$6,000</td>
                                     </tr>
                                 </tbody>
                                 <tfoot class="bg-slate-900 text-white border-t-4 border-white super-size-text">
                                     <tr>
-                                        <td class="p-4 font-medium text-slate-400">Total Investment</td>
-                                        <td class="p-4 text-right text-lg font-bold" id="scale-total-90">$0</td>
-                                        <td class="p-4 text-right text-lg font-bold bg-slate-800" id="scale-total-12m">$0</td>
+                                        <td class="p-6 font-medium text-stone-400">Total Investment</td>
+                                        <td class="p-6 text-right text-2xl font-black serif-font" id="scale-total-90">$0</td>
+                                        <td class="p-6 text-right text-2xl font-black serif-font bg-slate-800" id="scale-total-12m">$0</td>
                                     </tr>
-                                    <tr class="bg-slate-950 text-slate-400 border-t border-slate-800">
-                                        <td class="p-3 font-bold uppercase text-[10px]">Break Even Budget</td>
-                                        <td class="p-3 text-right font-mono text-emerald-400 font-bold" id="scale-breakeven-90">$0</td>
-                                        <td class="p-3 text-right font-mono text-emerald-400 font-bold bg-slate-900" id="scale-breakeven-12m">$0</td>
+                                    <tr class="bg-slate-950 text-stone-400 border-t border-slate-800">
+                                        <td class="p-4 font-bold uppercase text-xs tracking-widest">Break Even Budget</td>
+                                        <td class="p-4 text-right font-mono text-emerald-400 font-bold" id="scale-breakeven-90">$0</td>
+                                        <td class="p-4 text-right font-mono text-emerald-400 font-bold bg-slate-900" id="scale-breakeven-12m">$0</td>
                                     </tr>
                                     <!-- ROI Row -->
-                                    <tr class="bg-slate-950 text-slate-400 border-t border-slate-800">
-                                        <td class="p-3 font-bold uppercase text-[10px]">ROI % (Budget/Investment)</td>
-                                        <td class="p-3 text-right font-mono text-emerald-400 font-bold" id="scale-roi-90">0%</td>
-                                        <td class="p-3 text-right font-mono text-emerald-400 font-bold bg-slate-900" id="scale-roi-12m">0%</td>
+                                    <tr class="bg-slate-950 text-stone-400 border-t border-slate-800">
+                                        <td class="p-4 font-bold uppercase text-xs tracking-widest">ROI % (Budget/Investment)</td>
+                                        <td class="p-4 text-right font-mono text-emerald-400 font-bold" id="scale-roi-90">0%</td>
+                                        <td class="p-4 text-right font-mono text-emerald-400 font-bold bg-slate-900" id="scale-roi-12m">0%</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -521,78 +523,83 @@
                 </div>
 
                 <!-- FOOTER NAV -->
-                <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex justify-between items-center z-10">
-                    <button id="btn-back" class="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-500 font-bold hover:bg-slate-200 transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-xs" disabled>
-                        <i data-lucide="arrow-left" class="w-3 h-3"></i>
+                <div class="px-8 py-6 border-t border-stone-200 bg-white flex justify-between items-center z-10">
+                    <button id="btn-back" class="flex items-center gap-2 px-5 py-3 rounded-xl text-stone-500 font-bold hover:bg-stone-100 transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-xs uppercase tracking-wider" disabled>
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
                         Back
                     </button>
-                    <button id="btn-next" class="flex items-center gap-2 px-6 py-2 rounded-lg bg-slate-900 text-white font-bold hover:bg-slate-800 transition-transform active:scale-95 shadow-lg shadow-slate-900/20 text-xs">
+                    <button id="btn-next" class="flex items-center gap-2 px-8 py-3 rounded-xl bg-orange-600 text-white font-bold hover:bg-orange-700 transition-transform active:scale-95 shadow-lg shadow-orange-600/20 text-xs uppercase tracking-wider">
                         Next Step
-                        <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- RIGHT COLUMN: SIDEBAR (Reverted Design) -->
+            <!-- RIGHT COLUMN: SIDEBAR (Updated Design) -->
             <div id="layout-sidebar" class="col-span-1 lg:col-span-4 pl-0 lg:pl-4 transition-all duration-300">
                 <div class="sticky-sidebar">
-                    <div class="bg-white border-2 border-slate-200 rounded-2xl p-5 shadow-sm">
+                    <div class="bg-[#E5E7EB] rounded-[1.5rem] p-6 shadow-sm border border-stone-300 text-slate-800">
                         
                         <!-- Header with new Branding -->
-                        <div class="text-center pb-3 mb-3 border-b border-slate-100">
+                        <div class="text-center pb-4 mb-4 border-b border-stone-300/50">
+                            <!-- Logo -->
+                            <img src="https://themrmoritz.github.io/budgetcalc/ram-head-sticker-effect-no-background-shadow.png%20(3).png" alt="Mr. Moritz Logo" class="w-24 mx-auto mb-4 drop-shadow-sm">
+                            
                             <!-- New Brand Line -->
-                            <div class="font-black text-slate-900 uppercase text-lg tracking-tight mb-1 leading-none">
-                                MR. MORITZ <span class="italic text-slate-500 font-bold">+TEAM</span>
+                            <div class="font-black text-slate-900 uppercase text-xl tracking-tight mb-1 leading-none serif-font">
+                                MR. MORITZ <span class="italic text-stone-500 font-bold serif-font">+TEAM</span>
                             </div>
                             
-                            <h3 class="font-bold text-slate-400 uppercase text-[10px] tracking-widest mb-3">B2B MARKETING PAIN RELIEF</h3>
-                            <span class="text-[10px] font-bold text-slate-900 uppercase tracking-widest block border-t border-slate-100 pt-3">ACTIVE INGREDIENTS</span>
+                            <h3 class="font-bold text-stone-500 uppercase text-[10px] tracking-[0.2em] mb-4">B2B MARKETING PAIN RELIEF</h3>
+                            
+                            <span class="text-[10px] font-black text-slate-900 uppercase tracking-widest block border-t border-stone-300/50 pt-4">ACTIVE INGREDIENTS</span>
                             <!-- Dynamic Centered Context -->
-                            <div id="sidebar-context" class="text-xs text-slate-600 font-bold mt-2 leading-tight">
+                            <div id="sidebar-context" class="text-xs text-stone-600 font-bold mt-2 leading-tight">
                                 ...
                             </div>
                         </div>
 
-                        <!-- Ingredients List -->
-                        <div class="space-y-2 text-xs mb-4 max-h-[350px] overflow-y-auto pr-2 custom-scroll" id="summary-list">
-                            <div class="text-center text-slate-400 italic text-[10px] py-4">Initializing...</div>
+                        <!-- Ingredients List (Redesigned) -->
+                        <div class="space-y-3 text-sm mb-6 max-h-[350px] overflow-y-auto pr-2 custom-scroll" id="summary-list">
+                            <div class="text-center text-stone-400 italic text-xs py-6">Initializing...</div>
                         </div>
                         
-                        <!-- Budget Progress -->
-                        <div class="mb-4">
-                            <div class="flex justify-between items-end mb-1">
-                                <span class="text-[9px] font-bold text-slate-400 uppercase">Budget Usage</span>
-                                <span id="budget-percent" class="text-[9px] font-bold text-slate-900">0%</span>
+                        <!-- Budget Progress (Redesigned) -->
+                        <div class="mb-6 p-4 bg-stone-200/50 rounded-xl border border-stone-300/50" id="budget-section">
+                            <div class="flex justify-between items-end mb-2">
+                                <span class="text-[10px] font-black text-stone-500 uppercase tracking-wider">Budget Usage</span>
+                                <span id="budget-percent" class="text-sm font-black text-slate-900">0%</span>
                             </div>
-                            <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                            <!-- Dark Pill Bar -->
+                            <div class="w-full bg-stone-300 rounded-full h-3 overflow-hidden shadow-inner">
                                 <div id="budget-bar" class="bg-slate-900 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
                             </div>
                         </div>
 
-                        <!-- Totals Box (Side by Side) -->
-                        <div class="bg-slate-50 rounded-xl p-3 border border-slate-200">
-                            <div class="grid grid-cols-2 gap-2">
+                        <!-- Totals Box (Redesigned) -->
+                        <div class="bg-white rounded-xl p-5 border border-stone-200 shadow-sm">
+                            <div class="grid grid-cols-2 gap-4">
                                 <div class="text-left">
-                                    <span class="text-[9px] font-bold text-slate-400 uppercase block mb-0.5">Break-Even Budget</span>
-                                    <span id="summary-budget" class="font-bold text-slate-500 text-xs leading-tight">$0</span>
+                                    <span class="text-[10px] font-black text-stone-400 uppercase block mb-1 tracking-wider">Break-Even</span>
+                                    <span id="summary-budget" class="font-bold text-stone-500 text-sm leading-tight">$0</span>
                                 </div>
                                 <div class="text-right">
-                                    <span class="text-[9px] font-bold text-slate-500 uppercase block mb-0.5">Est. Investment</span>
-                                    <span id="summary-total" class="font-black text-slate-900 text-sm leading-tight">$0</span>
+                                    <span class="text-[10px] font-black text-stone-400 uppercase block mb-1 tracking-wider">Est. Investment</span>
+                                    <span id="summary-total" class="font-black text-slate-900 text-xl leading-tight serif-font">$0</span>
                                 </div>
                             </div>
                             
                             <!-- Warning -->
-                            <div id="budget-warning" class="hidden mt-2 text-center">
-                                <div class="inline-flex items-center gap-1 text-[9px] font-bold text-red-600 bg-red-50 px-2 py-1 rounded border border-red-100 w-full justify-center">
+                            <div id="budget-warning" class="hidden mt-3 text-center">
+                                <div class="inline-flex items-center gap-1 text-[10px] font-bold text-red-600 bg-red-50 px-3 py-1.5 rounded-lg border border-red-100 w-full justify-center">
                                     <i data-lucide="alert-triangle" class="w-3 h-3"></i>
-                                    Over Budget
+                                    OVER BUDGET
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="text-center mt-3">
-                            <span class="text-[9px] font-bold text-slate-300 uppercase tracking-widest">Dosage: 90 Days</span>
+                        <div class="text-center mt-4">
+                            <span class="text-[10px] font-bold text-stone-400 uppercase tracking-[0.2em]">Dosage: 90 Days</span>
                         </div>
                     </div>
                 </div>
@@ -656,6 +663,7 @@
             budgetWarning: document.getElementById('budget-warning'),
             budgetBar: document.getElementById('budget-bar'),
             budgetPercent: document.getElementById('budget-percent'),
+            budgetSection: document.getElementById('budget-section'),
             sidebarContext: document.getElementById('sidebar-context'),
             // Phase 2b Total
             displayPhase2bTotal: document.getElementById('display-phase2b-total'),
@@ -762,22 +770,22 @@
                 let costStr = formatCurrency(minCost);
                 if (minCost !== maxCost) costStr = `${formatCurrency(minCost)} - ${formatCurrency(maxCost)}`;
 
-                // Sidebar HTML (Standard Style)
+                // Sidebar HTML (Updated Design)
                 html += `
-                    <div class="flex justify-between items-center ${highlight ? 'text-slate-900 font-bold' : 'text-slate-500'}">
-                        <span>${label}</span>
-                        <span>${costStr}</span>
+                    <div class="flex justify-between items-center ${highlight ? 'text-slate-900 font-bold' : 'text-stone-500'}">
+                        <span class="${highlight ? 'font-black' : 'font-medium'}">${label}</span>
+                        <span class="${highlight ? 'text-slate-900' : 'text-stone-500'}">${costStr}</span>
                     </div>
                 `;
             };
 
             // Sidebar Rows
-            if (state.step >= 1) addRow('Phase 1: Blueprint', state.costs.phase1, state.costs.phase1, true);
+            if (state.step > 1) addRow('Strategy', state.costs.phase1, state.costs.phase1, true);
             if (state.step > 2) addRow('Phase 2: Concept', state.costs.phase2Min, state.costs.phase2Max, true);
             if (state.step > 3) addRow('Phase 2b: Production', state.costs.prodTotal, state.costs.prodTotal, true);
             if (state.step > 4) addRow('Phase 3: Follow-Up', state.costs.phase3, state.costs.phase3, true);
 
-            if (html === '') html = '<div class="text-center text-slate-400 italic text-[10px] py-4">Proceed to Step 2 to view breakdown...</div>';
+            if (html === '') html = '<div class="text-center text-stone-400 italic text-xs py-6">Proceed to Step 2 to set a budget...</div>';
             els.summaryList.innerHTML = html;
 
             // -- Update Step 6 (Summary Card) --
@@ -845,6 +853,13 @@
             els.budgetBar.style.width = `${budgetPercent}%`;
             els.budgetPercent.textContent = `${Math.round(budgetPercent)}%`;
 
+            // Toggle Budget Section Visibility
+            if (state.step === 1) {
+                els.budgetSection.classList.add('hidden');
+            } else {
+                els.budgetSection.classList.remove('hidden');
+            }
+
             if (budgetPercent > 100) {
                 els.summaryTotal.classList.add('text-red-600');
                 els.budgetWarning.classList.remove('hidden');
@@ -862,11 +877,11 @@
             const card = document.getElementById(`card-${id}`);
             const checkbox = document.getElementById(`check-${id}`);
             if (checkbox.checked) {
-                card.classList.remove('border-slate-300', 'bg-slate-50');
-                card.classList.add('border-slate-900', 'bg-slate-100');
+                card.classList.remove('border-stone-300', 'bg-white');
+                card.classList.add('border-slate-900', 'bg-stone-50');
             } else {
-                card.classList.add('border-slate-300', 'bg-slate-50');
-                card.classList.remove('border-slate-900', 'bg-slate-100');
+                card.classList.add('border-stone-300', 'bg-white');
+                card.classList.remove('border-slate-900', 'bg-stone-50');
             }
             calculateTotal();
         };
@@ -892,9 +907,9 @@
             Array.from(els.progressLabels).forEach((label, idx) => {
                 if(idx < state.step) {
                     label.classList.add('text-slate-900');
-                    label.classList.remove('text-slate-400');
+                    label.classList.remove('text-stone-400');
                 } else {
-                    label.classList.add('text-slate-400');
+                    label.classList.add('text-stone-400');
                     label.classList.remove('text-slate-900');
                 }
             });
