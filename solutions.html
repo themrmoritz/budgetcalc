@@ -110,13 +110,13 @@
                 <!-- Progress Indicator -->
                 <div class="px-8 py-6 border-b border-stone-100">
                     <div class="flex justify-between text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2" id="progress-labels">
-                        <span>ROI</span>
-                        <span>Strategy</span>
-                        <span>Creative</span>
-                        <span>Prod</span>
-                        <span>Content</span>
-                        <span>Summary</span>
-                        <span>Scale</span>
+                        <button class="hover:text-orange-600 transition-colors focus:outline-none">ROI</button>
+                        <button class="hover:text-orange-600 transition-colors focus:outline-none">Strategy</button>
+                        <button class="hover:text-orange-600 transition-colors focus:outline-none">Creative</button>
+                        <button class="hover:text-orange-600 transition-colors focus:outline-none">Prod</button>
+                        <button class="hover:text-orange-600 transition-colors focus:outline-none">Content</button>
+                        <button class="hover:text-orange-600 transition-colors focus:outline-none">Summary</button>
+                        <button class="hover:text-orange-600 transition-colors focus:outline-none">Scale</button>
                     </div>
                     <div class="h-1 bg-stone-100 rounded-full overflow-hidden">
                         <!-- Orange Progress Bar -->
@@ -421,19 +421,19 @@
                             <!-- List Items -->
                             <div class="divide-y divide-stone-100">
                                 <div class="p-5 flex justify-between items-center text-sm">
-                                    <span class="font-bold text-slate-700 serif-font">1. Strategy</span>
+                                    <span class="font-bold text-slate-700 serif-font">Strategy</span>
                                     <span class="font-bold text-slate-900">$5,000</span>
                                 </div>
                                 <div class="p-5 flex justify-between items-center text-sm">
-                                    <span class="font-bold text-slate-700 serif-font">2. Creative</span>
+                                    <span class="font-bold text-slate-700 serif-font">Creative</span>
                                     <span class="font-bold text-slate-900">$5,000 - $7,500</span>
                                 </div>
                                 <div class="p-5 flex justify-between items-center text-sm">
-                                    <span class="font-bold text-slate-700 serif-font">2B. Production</span>
+                                    <span class="font-bold text-slate-700 serif-font">Production</span>
                                     <span class="font-bold text-slate-900" id="summary-row-prod">$0</span>
                                 </div>
                                 <div class="p-5 flex justify-between items-center text-sm">
-                                    <span class="font-bold text-slate-700 serif-font">3. Sales Support</span>
+                                    <span class="font-bold text-slate-700 serif-font">Sales Support</span>
                                     <span class="font-bold text-slate-900" id="summary-row-follow">$0</span>
                                 </div>
                             </div>
@@ -950,6 +950,14 @@
 
         els.btnNext.addEventListener('click', () => nav('next'));
         els.btnBack.addEventListener('click', () => nav('back'));
+
+        // Add clickable nav logic
+        Array.from(els.progressLabels).forEach((label, index) => {
+            label.addEventListener('click', () => {
+                state.step = index + 1;
+                updateScreen();
+            });
+        });
 
         // --- INIT ---
         toggleCardStyle('nurture');
