@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boost Strategic Campaign Builder</title>
+    <!-- Favicon -->
+    <link rel="icon" href="https://themrmoritz.github.io/budgetcalc/ram-head-sticker-effect-no-background-shadow.png%20(3).png" type="image/png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -110,13 +112,13 @@
                 <!-- Progress Indicator -->
                 <div class="px-8 py-6 border-b border-stone-100">
                     <div class="flex justify-between text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2" id="progress-labels">
-                        <button class="hover:text-orange-600 transition-colors focus:outline-none">ROI</button>
-                        <button class="hover:text-orange-600 transition-colors focus:outline-none">Strategy</button>
-                        <button class="hover:text-orange-600 transition-colors focus:outline-none">Creative</button>
-                        <button class="hover:text-orange-600 transition-colors focus:outline-none">Prod</button>
-                        <button class="hover:text-orange-600 transition-colors focus:outline-none">Content</button>
-                        <button class="hover:text-orange-600 transition-colors focus:outline-none">Summary</button>
-                        <button class="hover:text-orange-600 transition-colors focus:outline-none">Scale</button>
+                        <span>ROI</span>
+                        <span>Strategy</span>
+                        <span>Creative</span>
+                        <span>Prod</span>
+                        <span>Content</span>
+                        <span>Summary</span>
+                        <span>Scale</span>
                     </div>
                     <div class="h-1 bg-stone-100 rounded-full overflow-hidden">
                         <!-- Orange Progress Bar -->
@@ -777,9 +779,9 @@
 
             // Sidebar Rows
             if (state.step > 1) addRow('Strategy', state.costs.phase1, state.costs.phase1, true);
-            if (state.step > 2) addRow('Phase 2: Concept', state.costs.phase2Min, state.costs.phase2Max, true);
-            if (state.step > 3) addRow('Phase 2b: Production', state.costs.prodTotal, state.costs.prodTotal, true);
-            if (state.step > 4) addRow('Phase 3: Sales Support', state.costs.phase3, state.costs.phase3, true);
+            if (state.step > 2) addRow('DM Creative', state.costs.phase2Min, state.costs.phase2Max, true);
+            if (state.step > 3) addRow('DM Production', state.costs.prodTotal, state.costs.prodTotal, true);
+            if (state.step > 4) addRow('Sales Support', state.costs.phase3, state.costs.phase3, true);
 
             if (html === '') html = '<div class="text-center text-stone-400 italic text-xs py-6">Proceed to Step 2 to set a budget...</div>';
             els.summaryList.innerHTML = html;
@@ -950,14 +952,6 @@
 
         els.btnNext.addEventListener('click', () => nav('next'));
         els.btnBack.addEventListener('click', () => nav('back'));
-
-        // Add clickable nav logic
-        Array.from(els.progressLabels).forEach((label, index) => {
-            label.addEventListener('click', () => {
-                state.step = index + 1;
-                updateScreen();
-            });
-        });
 
         // --- INIT ---
         toggleCardStyle('nurture');
