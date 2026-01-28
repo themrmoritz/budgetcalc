@@ -548,7 +548,7 @@
                             <h3 class="font-bold text-slate-400 uppercase text-[10px] tracking-widest mb-3">B2B MARKETING PAIN RELIEF</h3>
                             <span class="text-[10px] font-bold text-slate-900 uppercase tracking-widest block border-t border-slate-100 pt-3">ACTIVE INGREDIENTS</span>
                             <!-- Dynamic Centered Context -->
-                            <div id="sidebar-context" class="text-[9px] text-slate-500 font-medium mt-2 leading-tight">
+                            <div id="sidebar-context" class="text-xs text-slate-600 font-bold mt-2 leading-tight">
                                 ...
                             </div>
                         </div>
@@ -745,7 +745,7 @@
             const newCustomers = state.inputs.targets * (state.inputs.conv / 100);
             const custLabel = newCustomers > 1 || newCustomers === 0 ? 'customers' : 'customer';
             const formattedCust = newCustomers % 1 === 0 ? newCustomers : newCustomers.toFixed(1);
-            els.sidebarContext.textContent = `${state.inputs.conv.toFixed(1)}% conversion rate = ${formattedCust} new ${custLabel} during trial period`;
+            els.sidebarContext.textContent = `💡 ${state.inputs.conv.toFixed(1)}% conversion rate = ${formattedCust} new ${custLabel} during trial period`;
 
             // 12m Logic Calculations
             // 12m Production = 90day Total * 4
@@ -772,12 +772,12 @@
             };
 
             // Sidebar Rows
-            if (state.step > 1) addRow('Phase 1: Blueprint', state.costs.phase1, state.costs.phase1, true);
+            if (state.step >= 1) addRow('Phase 1: Blueprint', state.costs.phase1, state.costs.phase1, true);
             if (state.step > 2) addRow('Phase 2: Concept', state.costs.phase2Min, state.costs.phase2Max, true);
             if (state.step > 3) addRow('Phase 2b: Production', state.costs.prodTotal, state.costs.prodTotal, true);
             if (state.step > 4) addRow('Phase 3: Follow-Up', state.costs.phase3, state.costs.phase3, true);
 
-            if (html === '') html = '<div class="text-center text-slate-400 italic text-[10px] py-4">Initializing...</div>';
+            if (html === '') html = '<div class="text-center text-slate-400 italic text-[10px] py-4">Proceed to Step 2 to view breakdown...</div>';
             els.summaryList.innerHTML = html;
 
             // -- Update Step 6 (Summary Card) --
