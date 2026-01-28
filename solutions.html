@@ -219,7 +219,7 @@
                         </div>
                     </div>
 
-                    <!-- STEP 2: BLUEPRINT -->
+                    <!-- STEP 2: BLUEPRINT (STRATEGY) -->
                     <div id="step-2" class="step-hidden slide-in">
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
                             <!-- Content -->
@@ -263,7 +263,7 @@
                         </div>
                     </div>
 
-                    <!-- STEP 3: CREATIVE -->
+                    <!-- STEP 3: CREATIVE (DM CREATIVE) -->
                     <div id="step-3" class="step-hidden slide-in">
                         <div class="mb-6">
                             <h2 class="text-4xl font-black text-slate-900 mb-2">DM Creative</h2>
@@ -292,8 +292,8 @@
                             <div class="flex items-center justify-center">
                                 <div class="w-full bg-[#FDFBF7] text-slate-900 p-8 rounded-3xl text-center border-2 border-stone-200 relative overflow-hidden">
                                     <div class="absolute top-0 left-0 w-full h-2 bg-orange-600"></div>
-                                    <div class="text-4xl font-black tracking-tight mb-2 serif-font mt-8">$5k - $7.5k</div>
-                                    <p class="text-stone-400 text-[10px] font-medium max-w-[240px] mx-auto mt-2">Range depends on concept intricacy. Includes content & packaging design.</p>
+                                    <div class="text-4xl font-black tracking-tight mb-2 serif-font mt-8">$5,000</div>
+                                    <p class="text-stone-400 text-[10px] font-medium max-w-[240px] mx-auto mt-2">Includes content & packaging design.</p>
                                 </div>
                             </div>
                         </div>
@@ -318,13 +318,22 @@
                                 </ul>
 
                                 <!-- Cost Input -->
-                                <div class="bg-[#FDFBF7] p-6 rounded-2xl border border-stone-200">
+                                <div class="bg-[#FDFBF7] p-6 rounded-2xl border border-stone-200 mb-4">
                                     <label class="text-[10px] font-bold text-stone-500 uppercase tracking-wide mb-2 block">Est. Cost Per Package</label>
                                     <div class="relative w-full">
                                         <span class="absolute left-4 top-3 text-stone-400 font-bold text-sm">$</span>
-                                        <input type="number" id="input-man-cost" value="100" class="w-full p-3 pl-8 border border-stone-200 rounded-xl focus:border-slate-900 focus:outline-none font-bold text-slate-900 text-lg bg-white shadow-sm">
+                                        <input type="number" id="input-man-cost" value="25" class="w-full p-3 pl-8 border border-stone-200 rounded-xl focus:border-slate-900 focus:outline-none font-bold text-slate-900 text-lg bg-white shadow-sm">
                                     </div>
                                     <p class="text-[10px] text-stone-400 mt-3 italic">Calculated against <span id="prod-target-display" class="font-bold text-slate-600">50</span> targets.</p>
+                                </div>
+
+                                <!-- Distribution Box (Moved Below) -->
+                                <div class="flex items-start gap-4 p-4 bg-white border border-stone-100 rounded-xl shadow-sm">
+                                    <div class="mt-0.5 text-orange-600"><i data-lucide="truck" class="w-5 h-5"></i></div>
+                                    <div>
+                                        <span class="font-bold text-slate-900 text-sm block serif-font">Distribution</span>
+                                        <span class="text-[11px] text-stone-500 block mt-1 leading-relaxed">To be handled by client unless otherwise discussed.</span>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -332,18 +341,18 @@
                             <div class="flex items-center justify-center">
                                 <div class="w-full bg-[#FDFBF7] text-slate-900 p-8 rounded-3xl text-center border-2 border-stone-200 relative overflow-hidden">
                                     <div class="absolute top-0 left-0 w-full h-2 bg-orange-600"></div>
-                                    <div class="text-5xl font-black tracking-tight mb-2 serif-font mt-8" id="display-phase2b-total">$5,000</div>
+                                    <div class="text-5xl font-black tracking-tight mb-2 serif-font mt-8" id="display-phase2b-total">$1,250</div>
                                     <p class="text-stone-400 text-[10px] font-medium max-w-[200px] mx-auto mt-2">Total manufacturing cost for the pilot batch.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- STEP 5: FOLLOW UP -->
+                    <!-- STEP 5: FOLLOW UP (SALES SUPPORT) -->
                     <div id="step-5" class="step-hidden slide-in">
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
                             <div>
-                                <h2 class="text-4xl font-black text-slate-900 mb-2">Sales Content Support</h2>
+                                <h2 class="text-4xl font-black text-slate-900 mb-2">Sales Support</h2>
                                 
                                 <div class="space-y-4">
                                     <!-- Required Item -->
@@ -358,8 +367,8 @@
                                     </div>
 
                                     <!-- Option 1 -->
-                                    <label class="flex items-start gap-4 p-4 rounded-xl border border-slate-900 bg-stone-50 cursor-pointer transition-all relative group" id="card-nurture">
-                                        <input type="checkbox" id="check-nurture" class="mt-0.5 w-4 h-4 accent-slate-900" checked onchange="toggleCardStyle('nurture')">
+                                    <label class="flex items-start gap-4 p-4 rounded-xl border border-stone-300 bg-white cursor-pointer transition-all relative group" id="card-nurture">
+                                        <input type="checkbox" id="check-nurture" class="mt-0.5 w-4 h-4 accent-slate-900" onchange="toggleCardStyle('nurture')">
                                         <div>
                                             <div class="flex justify-between w-full">
                                                 <span class="font-bold text-slate-900 text-sm serif-font">Follow-Up Nurture Comms</span>
@@ -372,25 +381,37 @@
 
                                     <!-- Option 2 -->
                                     <label class="flex items-start gap-4 p-4 rounded-xl border border-stone-300 bg-white cursor-pointer transition-all relative group" id="card-deck">
-                                        <input type="checkbox" id="check-deck" class="mt-0.5 w-4 h-4 accent-slate-900" checked onchange="toggleCardStyle('deck')">
+                                        <input type="checkbox" id="check-deck" class="mt-0.5 w-4 h-4 accent-slate-900" onchange="toggleCardStyle('deck')">
                                         <div>
                                             <div class="flex justify-between w-full">
                                                 <span class="font-bold text-slate-900 text-sm serif-font">"Closer" Sales Deck</span>
                                                 <span class="font-bold text-slate-600 text-sm">+$2,500</span>
                                             </div>
-                                            <p class="text-[11px] text-stone-500 mt-1">Scripting & design for leave-behind deck.</p>
+                                            <p class="text-[11px] text-stone-500 mt-1">Scripting, design and production for leave-behind physical “deck of cards”.</p>
                                         </div>
                                     </label>
 
                                     <!-- Option 3 -->
                                     <label class="flex items-start gap-4 p-4 rounded-xl border border-stone-300 bg-white cursor-pointer transition-all relative group" id="card-lp">
-                                        <input type="checkbox" id="check-lp" class="mt-0.5 w-4 h-4 accent-slate-900" checked onchange="toggleCardStyle('lp')">
+                                        <input type="checkbox" id="check-lp" class="mt-0.5 w-4 h-4 accent-slate-900" onchange="toggleCardStyle('lp')">
                                         <div>
                                             <div class="flex justify-between w-full">
                                                 <span class="font-bold text-slate-900 text-sm serif-font">Campaign Landing Page</span>
                                                 <span class="font-bold text-slate-600 text-sm">+$2,000</span>
                                             </div>
                                             <p class="text-[11px] text-stone-500 mt-1">Copy & design optimised for conversion.</p>
+                                        </div>
+                                    </label>
+
+                                    <!-- Option 4: Interactive Calculator -->
+                                    <label class="flex items-start gap-4 p-4 rounded-xl border border-stone-300 bg-white cursor-pointer transition-all relative group" id="card-calc">
+                                        <input type="checkbox" id="check-calc" class="mt-0.5 w-4 h-4 accent-slate-900" onchange="toggleCardStyle('calc')">
+                                        <div>
+                                            <div class="flex justify-between w-full">
+                                                <span class="font-bold text-slate-900 text-sm serif-font">Interactive Sales Calculator</span>
+                                                <span class="font-bold text-slate-600 text-sm">+$2,500</span>
+                                            </div>
+                                            <p class="text-[11px] text-stone-500 mt-1">Custom financial planning tool tailored to the unique Solutions Financial offering</p>
                                         </div>
                                     </label>
                                 </div>
@@ -400,7 +421,7 @@
                             <div class="flex items-center justify-center">
                                 <div class="w-full bg-[#FDFBF7] text-slate-900 p-8 rounded-3xl text-center border-2 border-stone-200 relative overflow-hidden">
                                     <div class="absolute top-0 left-0 w-full h-2 bg-orange-600"></div>
-                                    <div class="text-5xl font-black tracking-tight mb-2 serif-font mt-8" id="display-phase3-total">$9,250</div>
+                                    <div class="text-5xl font-black tracking-tight mb-2 serif-font mt-8" id="display-phase3-total">$4,500</div>
                                 </div>
                             </div>
                         </div>
@@ -431,7 +452,7 @@
                                     <span class="font-bold text-slate-900">$5,000 - $7,500</span>
                                 </div>
                                 <div class="p-5 flex justify-between items-center text-sm">
-                                    <span class="font-bold text-slate-700 serif-font">Production</span>
+                                    <span class="font-bold text-slate-700 serif-font">DM Production</span>
                                     <span class="font-bold text-slate-900" id="summary-row-prod">$0</span>
                                 </div>
                                 <div class="p-5 flex justify-between items-center text-sm">
@@ -442,7 +463,7 @@
 
                             <!-- Footer Total -->
                             <div class="p-6 bg-slate-900 text-white flex justify-between items-center">
-                                <span class="font-medium text-stone-400 text-xs uppercase tracking-widest">Total Investment Range</span>
+                                <span class="font-medium text-stone-400 text-xs uppercase tracking-widest">Total Investment</span>
                                 <span class="text-2xl font-black serif-font" id="final-summary-total">$0</span>
                             </div>
                         </div>
@@ -485,7 +506,7 @@
                                         <td class="p-6 text-right font-medium text-stone-500 bg-stone-50">$0</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-6 font-bold text-slate-700 serif-font">Production</td>
+                                        <td class="p-6 font-bold text-slate-700 serif-font">DM Production</td>
                                         <td class="p-6 text-right font-medium text-slate-900" id="scale-row-prod-90">$0</td>
                                         <td class="p-6 text-right font-medium text-slate-900 bg-stone-50" id="scale-row-prod-12m">$0</td>
                                     </tr>
@@ -616,15 +637,16 @@
                 spend: 75000,
                 tenure: 1,
                 margin: 37,
-                manCost: 100, // Now just a single cost
-                nurture: true,
-                deck: true,
-                lp: true
+                manCost: 25, // Updated default cost
+                nurture: false, // Default unselected
+                deck: false, // Default unselected
+                lp: false, // Default unselected
+                interactiveCalc: false // New Option Default
             },
             costs: {
                 phase1: 5000,
                 phase2Min: 5000,
-                phase2Max: 7500,
+                phase2Max: 5000,
                 phase3: 10250,
                 prodTotal: 0
             },
@@ -644,6 +666,7 @@
             nurture: document.getElementById('check-nurture'),
             deck: document.getElementById('check-deck'),
             lp: document.getElementById('check-lp'),
+            interactiveCalc: document.getElementById('check-calc'),
             screens: [1,2,3,4,5,6,7].map(i => document.getElementById(`step-${i}`)),
             btnNext: document.getElementById('btn-next'),
             btnBack: document.getElementById('btn-back'),
@@ -707,6 +730,7 @@
             state.inputs.nurture = els.nurture.checked;
             state.inputs.deck = els.deck.checked;
             state.inputs.lp = els.lp.checked;
+            state.inputs.interactiveCalc = els.interactiveCalc.checked;
 
             // ROI Math
             els.displayConv.textContent = state.inputs.conv.toFixed(1) + '%';
@@ -726,8 +750,9 @@
             // Phase 3 (Project Support $1500*3 = $4500 fixed)
             let p3 = 4500;
             if(state.inputs.nurture) p3 += 750;
-            if(state.inputs.deck) p3 += 2000;
+            if(state.inputs.deck) p3 += 2500;
             if(state.inputs.lp) p3 += 2000;
+            if(state.inputs.interactiveCalc) p3 += 2500;
             state.costs.phase3 = p3;
             els.phase3Total.textContent = formatCurrency(p3);
 
@@ -898,14 +923,18 @@
 
         const updateScreen = () => {
             els.screens.forEach(s => {
-                s.classList.remove('step-active', 'slide-in');
-                s.classList.add('step-hidden');
+                if (s) {
+                    s.classList.remove('step-active', 'slide-in');
+                    s.classList.add('step-hidden');
+                }
             });
 
             const current = els.screens[state.step - 1];
-            current.classList.remove('step-hidden');
-            void current.offsetWidth;
-            current.classList.add('step-active', 'slide-in');
+            if (current) {
+                current.classList.remove('step-hidden');
+                void current.offsetWidth;
+                current.classList.add('step-active', 'slide-in');
+            }
 
             els.progressBar.style.width = `${(state.step / state.totalSteps) * 100}%`;
             Array.from(els.progressLabels).forEach((label, idx) => {
@@ -957,6 +986,7 @@
         toggleCardStyle('nurture');
         toggleCardStyle('deck');
         toggleCardStyle('lp');
+        toggleCardStyle('calc');
         calculateTotal();
         lucide.createIcons();
 
